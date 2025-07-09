@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StepperProps } from "src/core/types/user.type";
+import React, { useState } from 'react';
+import { StepperProps } from 'src/core/types/user.type';
 export interface Iitem {
   items: StepperProps[];
 }
@@ -25,27 +25,26 @@ const StepperVertical = (props: Iitem) => {
               <div className="text-sm">{step.title}</div>
               <div className="text-xs">{step.desription}</div>
             </div>
-            <div className="flex flex-col gap-1 mb-1 justify-center items-center">
+            <div className="mb-1 flex flex-col items-center justify-center gap-1">
               <div
                 className={`${
                   index < 0 ||
                   index < currentStep ||
                   currentStep === props.items.length - 1
-                    ? "bg-amber-500 text-white"
-                    : "bg-white border border-gray-400 text-gray-400"
+                    ? 'bg-amber-500 text-white'
+                    : 'border border-gray-400 bg-white text-gray-400'
                       ? index === currentStep
-                        ? "border border-amber-500 text-white"
-                        : "bg-white border border-gray-400 text-gray-400"
-                      : ""
-                }
-                  p-2 w-8 h-8 flex-col items-center justify-center flex rounded-full cursor-pointer`}
+                        ? 'border-amber-500 border text-white'
+                        : 'border border-gray-400 bg-white text-gray-400'
+                      : ''
+                } flex h-8 w-8 cursor-pointer flex-col items-center justify-center rounded-full p-2`}
               >
                 {index < currentStep ||
                 currentStep === props.items.length - 1 ? (
                   <div>{index + 1}</div>
                 ) : <div></div> ? (
                   index === currentStep ? (
-                    <div className="flex justify-center items-center w-6 h-6 bg-amber-500 rounded-full">
+                    <div className="bg-amber-500 flex h-6 w-6 items-center justify-center rounded-full">
                       {index + 1}
                     </div>
                   ) : (
@@ -60,38 +59,38 @@ const StepperVertical = (props: Iitem) => {
                   <div></div>
                 ) : (
                   <div
-                    className={`w-px h-8 ${
+                    className={`h-8 w-px ${
                       index <= currentStep
-                        ? "border border-amber-500"
-                        : "border border-gray-400"
+                        ? 'border-amber-500 border'
+                        : 'border border-gray-400'
                     }`}
                   ></div>
                 )}
               </div>
             </div>
             {index < currentStep || currentStep === props.items.length - 1 ? (
-              <div className="flex bg-green-50 w-20 h-8 justify-center items-center rounded-2xl">
-                <div className="text-green-500 text-sx font-normal font-wide tracking-wide">
+              <div className="flex h-8 w-20 items-center justify-center rounded-2xl bg-green-50">
+                <div className="text-sx font-wide font-normal tracking-wide text-green-500">
                   Completed
                 </div>
               </div>
             ) : <div></div> ? (
               index === currentStep ? (
-                <div className="flex bg-blue-50 w-20 h-8 justify-center items-center rounded-2xl">
-                  <div className="text-blue-500 text-[11px] font-normal font-['Cairo'] tracking-wide">
+                <div className="flex h-8 w-20 items-center justify-center rounded-2xl bg-blue-50">
+                  <div className="font-['Cairo'] text-[11px] font-normal tracking-wide text-blue-500">
                     In progress
                   </div>
                 </div>
               ) : (
-                <div className="flex bg-gray-50 w-[75px] h-[29px] justify-center items-center rounded-[15px]">
-                  <div className="text-gray-400 text-[11px] font-normal font-['Cairo'] tracking-wide">
+                <div className="flex h-[29px] w-[75px] items-center justify-center rounded-[15px] bg-gray-50">
+                  <div className="font-['Cairo'] text-[11px] font-normal tracking-wide text-gray-400">
                     Pending
                   </div>
                 </div>
               )
             ) : (
               <div></div>
-            )}{" "}
+            )}{' '}
           </div>
         ))}
       </div>
@@ -100,7 +99,7 @@ const StepperVertical = (props: Iitem) => {
           {currentStep > 0 && (
             <button
               onClick={handlePrevious}
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-4"
+              className="mr-4 rounded-lg bg-blue-500 px-4 py-2 text-white"
             >
               Previous
             </button>
@@ -108,7 +107,7 @@ const StepperVertical = (props: Iitem) => {
           {currentStep < props.items.length - 1 && (
             <button
               onClick={handleNext}
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+              className="rounded-lg bg-blue-500 px-4 py-2 text-white"
             >
               Next
             </button>

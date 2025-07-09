@@ -1,45 +1,66 @@
+import { Pencil, Trash2 } from "lucide-react";
+
 interface TaskCardProps {
-    title: string;
-    desription?: string;
-    priority: string;
-    status: string;
-    commentsCount?: number;
-    people?: string[];
-  }
-  export function TaskCard({
-    title,
-    desription,
-    priority,
-    // status,
-    commentsCount,
-    // people,
-  }: TaskCardProps) {
-    const priorityColors: Record<string, string> = {
-      LOW: "bg-teal-500",
-      MEDIUM: "bg-orange-500",
-      HIGH: "bg-rose-500",
-    };
-  
-    const priorityColor = priorityColors[priority.toUpperCase()] || "bg-gray-300";
-  
-    return (
-      <div className="bg-white rounded-lg shadow p-4 border relative">
-        <h4 className="text-sm font-semibold text-tamPurple-tam mb-1">
-  {title}
-</h4>
-  
-        {desription && <p className="text-sm text-gray-600 mb-2">{desription}</p>}
-  
-        <div className="text-xs text-gray-500 flex justify-between items-center">
-          <span className="flex items-center gap-1 capitalize">
-            <span className={`w-2 h-2 rounded-full ${priorityColor}`}></span>
-            {priority.toLowerCase()} priority
-          </span>
-          {commentsCount !== undefined && (
-            <span>{commentsCount} comments</span>
-          )}
-        </div>
+  id: string;
+  title: string;
+  desription?: string;
+  priority: string;
+  status: string;
+  commentsCount?: number;
+  people?: string[];
+  onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void;
+}
+
+export function TaskCard({
+  id,
+  title,
+  desription,
+  priority,
+  commentsCount,
+  onEdit,
+  onDelete,
+}: TaskCardProps) {
+  const priorityColors: Record<string, string> = {
+    LOW: "bg-teal-500",
+    MEDIUM: "bg-orange-500",
+    HIGH: "bg-rose-500",
+  };
+
+  const priorityColor = priorityColors[priority.toUpperCase()] || "bg-gray-300";
+
+  return (
+    <div className="relative rounded-lg border bg-white p-4 shadow group">
+      {/* Top-right action buttons */}
+      <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <button
+          onClick={() => onEdit?.(id)}
+          className="text-gray-500 hover:text-tamPurple-tam"
+          title="Edit"
+        >
+          <Pencil className="w-4 h-4" />
+        </button>
+        <button
+          onClick={() => onDelete?.(id)}
+          className="text-gray-500 hover:text-red-600"
+          title="Delete"
+        >
+          <Trash2 className="w-4 h-4" />
+        </button>
       </div>
-    );
-  }
-  
+
+      {/* Card content */}
+      <h4 className="mb-1 text-sm font-semibold text-tamPurple-tam">{title}</h4>
+      {id && <p className="mb-2 text-sm text-gray-600">{id}</p>}
+      {desription && <p className="mb-2 text-sm text-gray-600">{desription}</p>}
+
+      <div className="flex items-center justify-between text-xs text-gray-500">
+        <span className="flex items-center gap-1 capitalize">
+          <span className={`h-2 w-2 rounded-full ${priorityColor}`}></span>
+          {priority.toLowerCase()} priority
+        </span>
+        {commentsCount !== undefined && <span>{commentsCount} comments</span>}
+      </div>
+    </div>
+  );
+}

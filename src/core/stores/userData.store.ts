@@ -7,8 +7,6 @@ type UserDataStoreType = {
   logout: () => void;
 };
 
-
-
 export const useUserDataStore = create<UserDataStoreType>((set) => ({
   accessToken: localStorage.getItem('token'),
   isLoggedIn: Boolean(localStorage.getItem('token')),

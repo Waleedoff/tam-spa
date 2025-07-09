@@ -1,8 +1,8 @@
-import { useFormik } from "formik";
-import { InputField } from "src/components/common/ui/Input";
-import { Button } from "src/components/common/ui/Button";
-import { TaskCreateType } from "src/core/types/user.type";
-import { taskEditValidationSchema } from "./task-edit-form.validation";
+import { useFormik } from 'formik';
+import { InputField } from 'src/components/common/ui/Input';
+import { Button } from 'src/components/common/ui/Button';
+import { TaskCreateType } from 'src/core/types/user.type';
+import { taskEditValidationSchema } from './task-edit-form.validation';
 
 interface TaskEditFormProps {
   initialValues: TaskCreateType & { id: string };
@@ -10,7 +10,11 @@ interface TaskEditFormProps {
   onClose: () => void;
 }
 
-export default function TaskEditForm({ initialValues, onSubmit, onClose }: TaskEditFormProps) {
+export default function TaskEditForm({
+  initialValues,
+  onSubmit,
+  onClose,
+}: TaskEditFormProps) {
   const formik = useFormik({
     initialValues,
     validationSchema: taskEditValidationSchema,
@@ -28,7 +32,7 @@ export default function TaskEditForm({ initialValues, onSubmit, onClose }: TaskE
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         isValid={formik.touched.title ? !formik.errors.title : undefined}
-        error={formik.touched.title ? formik.errors.title : ""}
+        error={formik.touched.title ? formik.errors.title : ''}
       />
 
       <InputField
@@ -37,18 +41,20 @@ export default function TaskEditForm({ initialValues, onSubmit, onClose }: TaskE
         value={formik.values.desription}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        isValid={formik.touched.desription ? !formik.errors.desription : undefined}
-        error={formik.touched.desription ? formik.errors.desription : ""}
+        isValid={
+          formik.touched.desription ? !formik.errors.desription : undefined
+        }
+        error={formik.touched.desription ? formik.errors.desription : ''}
       />
 
       <div>
-        <label className="block font-medium mb-1">Priority</label>
+        <label className="mb-1 block font-medium">Priority</label>
         <select
           name="priority"
           value={formik.values.priority}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          className="w-full border px-3 py-2 rounded"
+          className="w-full rounded border px-3 py-2"
         >
           <option value="">Select priority</option>
           <option value="LOW">LOW</option>
@@ -56,12 +62,18 @@ export default function TaskEditForm({ initialValues, onSubmit, onClose }: TaskE
           <option value="HIGH">HIGH</option>
         </select>
         {formik.touched.priority && formik.errors.priority && (
-          <div className="text-red-500 text-sm mt-1">{formik.errors.priority}</div>
+          <div className="mt-1 text-sm text-red-500">
+            {formik.errors.priority}
+          </div>
         )}
       </div>
 
       <div className="flex justify-end gap-2">
-        <Button type="button" onClick={onClose} className="bg-gray-200 text-black">
+        <Button
+          type="button"
+          onClick={onClose}
+          className="bg-gray-200 text-black"
+        >
           Cancel
         </Button>
         <Button type="submit" className="bg-tamPurple-tam text-white">

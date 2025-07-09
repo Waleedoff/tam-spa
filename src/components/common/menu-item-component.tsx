@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   MenuStatusEnum,
   MenuTypeEnum,
   OptionLevelEnum,
-} from "src/core/enums/design-system.enum";
+} from 'src/core/enums/design-system.enum';
 export interface MenuItemProps {
   text?: string;
   action1?: JSX.Element;
@@ -16,9 +16,9 @@ export interface MenuItemProps {
   level?: OptionLevelEnum;
 }
 function MenuItem({
-  text = "",
-  width = "w-80",
-  height = "h-9",
+  text = '',
+  width = 'w-80',
+  height = 'h-9',
   action1 = <>Action 1</>,
   action2 = <>Action 2</>,
   action3 = <>Action 3</>,
@@ -30,14 +30,14 @@ function MenuItem({
 
   const getStatusStyle = (passedStatus?: MenuStatusEnum) => {
     const default_status =
-      "bg-white text-gray-900 dark:bg-gray-900 dark:text-white";
-    const hover = "hover:bg-opacity-70 dark:hover:bg-gray-800";
+      'bg-white text-gray-900 dark:bg-gray-900 dark:text-white';
+    const hover = 'hover:bg-opacity-70 dark:hover:bg-gray-800';
     const active =
-      "active:bg-amber-50 dark:active:bg-amber-500 dark:active:text-white";
+      'active:bg-amber-50 dark:active:bg-amber-500 dark:active:text-white';
     const selected =
-      "bg-amber-50 dark:bg-amber-500 dark:text-white hover:border hover:border-amber-500 hover:dark:border hover:dark:border-amber-700";
+      'bg-amber-50 dark:bg-amber-500 dark:text-white hover:border hover:border-amber-500 hover:dark:border hover:dark:border-amber-700';
     const disabled =
-      "bg-white text-gray-300 dark:bg-gray-900 dark:text-gray-500";
+      'bg-white text-gray-300 dark:bg-gray-900 dark:text-gray-500';
 
     switch (passedStatus || status) {
       case MenuStatusEnum.Default:
@@ -55,30 +55,30 @@ function MenuItem({
     setIsSelected(!isSelected);
   };
   const doAction1 = () => {
-    ("do action 1");
+    ('do action 1');
   };
   const doAction2 = () => {
-    ("do action 2");
+    ('do action 2');
   };
   const doAction3 = () => {
-    ("do action 3");
+    ('do action 3');
   };
 
   // if type is option then I can use level function.
   const getOptionLevel = () => {
     switch (level) {
       case OptionLevelEnum.One:
-        return "px-4";
+        return 'px-4';
       case OptionLevelEnum.Two:
-        return "px-11";
+        return 'px-11';
       case OptionLevelEnum.Three:
-        return "px-16";
+        return 'px-16';
       case OptionLevelEnum.Four:
-        return "px-24";
+        return 'px-24';
       case OptionLevelEnum.Five:
-        return "px-32";
+        return 'px-32';
       default:
-        return "px-4";
+        return 'px-4';
     }
   };
 
@@ -90,7 +90,7 @@ function MenuItem({
           isSelected
             ? getStatusStyle(MenuStatusEnum.Selected)
             : getStatusStyle()
-        } ${getOptionLevel()} flex justify-start items-center text-sm cursor-not-allowed`}
+        } ${getOptionLevel()} flex cursor-not-allowed items-center justify-start text-sm`}
         disabled
       >
         {text}
@@ -102,20 +102,20 @@ function MenuItem({
           isSelected
             ? getStatusStyle(MenuStatusEnum.Selected)
             : getStatusStyle()
-        } ${getOptionLevel()} flex justify-start items-center text-sm cursor-pointer`}
+        } ${getOptionLevel()} flex cursor-pointer items-center justify-start text-sm`}
       >
         {text}
       </button>
     )
   ) : type === MenuTypeEnum.Label ? (
     <div
-      className={`${width} ${height} flex justify-start items-center text-sm bg-white dark:bg-gray-900 dark:text-gray-400 text-gray-500 px-4`}
+      className={`${width} ${height} flex items-center justify-start bg-white px-4 text-sm text-gray-500 dark:bg-gray-900 dark:text-gray-400`}
     >
       {text}
     </div>
   ) : (
     <div
-      className={`${width} ${height} flex flex-row justify-between items-center text-sm px-4 text-amber-500 bg-white dark:bg-gray-900 dark:text-amber-500`}
+      className={`${width} ${height} text-amber-500 dark:text-amber-500 flex flex-row items-center justify-between bg-white px-4 text-sm dark:bg-gray-900`}
     >
       <div className="flex flex-row gap-4">
         <div onClick={doAction1} className="cursor-pointer">

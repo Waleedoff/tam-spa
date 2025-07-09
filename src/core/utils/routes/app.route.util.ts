@@ -1,22 +1,22 @@
 export class AppRoute {
   static getCommonQuestionsUrl(): string {
-    return "/faq";
+    return '/faq';
   }
   static getTermsAndConditionsUrl(): string {
-    return "/terms-and-conditions";
+    return '/terms-and-conditions';
   }
   static getPrivacyUrl(): string {
-    return "/privacy";
+    return '/privacy';
   }
   static getSupportUrl(): string {
-    return "/contact";
+    return '/contact';
   }
 
   static getForbiddenUrl(): string {
-    return "/forbidden";
+    return '/forbidden';
   }
 
   static get404Url(): string {
-    return "/404";
+    return '/404';
   }
 }

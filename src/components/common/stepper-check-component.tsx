@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { BiCheck } from "react-icons/bi";
+import { useState } from 'react';
+import { BiCheck } from 'react-icons/bi';
 export interface StepperCheckProps {
   steps: string[];
   className?: string;
@@ -18,34 +18,33 @@ const StepperCheck = (props: StepperCheckProps) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center w-screen">
-      <div className="flex justify-center items-center gap-1 w-screen px-4">
+    <div className="flex w-screen flex-col items-center justify-center">
+      <div className="flex w-screen items-center justify-center gap-1 px-4">
         {props.steps.map((step, index) => (
-          <div className="flex flex-col w-[30%] min-w-min" key={index}>
+          <div className="flex w-[30%] min-w-min flex-col" key={index}>
             <div
               className={`${
                 index < 0 ||
                 index < currentStep ||
                 currentStep === props.steps.length - 1
-                  ? "bg-gray-500 text-white"
-                  : "bg-gray-200 text-gray-600"
+                  ? 'bg-gray-500 text-white'
+                  : 'bg-gray-200 text-gray-600'
                     ? index === currentStep
-                      ? "bg-amber-400 text-white"
-                      : "bg-gray-200 text-gray-600"
-                    : ""
-              }
-                 h-1 rounded-sm w-full`}
+                      ? 'bg-amber-400 text-white'
+                      : 'bg-gray-200 text-gray-600'
+                    : ''
+              } h-1 w-full rounded-sm`}
             ></div>
             <div className="flex items-center gap-2 pt-1">
               {index < currentStep || currentStep === props.steps.length - 1 ? (
-                <div className="flex w-4 h-4 bg-gray-500 justify-center items-center rounded-full">
-                  <BiCheck className="text-white w-9 h-9" />
+                <div className="flex h-4 w-4 items-center justify-center rounded-full bg-gray-500">
+                  <BiCheck className="h-9 w-9 text-white" />
                 </div>
               ) : <div></div> ? (
                 index === currentStep ? (
-                  <div className="w-4 h-4 rounded-full border-[5px] border-amber-500"></div>
+                  <div className="border-amber-500 h-4 w-4 rounded-full border-[5px]"></div>
                 ) : (
-                  <div className="w-4 h-4 rounded-full border-gray-400 border-2"></div>
+                  <div className="h-4 w-4 rounded-full border-2 border-gray-400"></div>
                 )
               ) : (
                 <div></div>
@@ -60,7 +59,7 @@ const StepperCheck = (props: StepperCheckProps) => {
           {currentStep > 0 && (
             <button
               onClick={handlePrevious}
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-4"
+              className="mr-4 rounded-lg bg-blue-500 px-4 py-2 text-white"
             >
               Previous
             </button>
@@ -68,7 +67,7 @@ const StepperCheck = (props: StepperCheckProps) => {
           {currentStep < props.steps.length - 1 && (
             <button
               onClick={handleNext}
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+              className="rounded-lg bg-blue-500 px-4 py-2 text-white"
             >
               Next
             </button>

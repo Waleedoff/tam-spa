@@ -1,4 +1,4 @@
-const adminRule = "admin";
+const adminRule = 'admin';
 export const hasAdminAccess = (rules: string[] = []): boolean => {
   return rules.includes(adminRule);
 };

@@ -1,8 +1,7 @@
-
-import { TaskCreateType } from "src/core/types/user.type";
+import { TaskCreateType } from 'src/core/types/user.type';
 
 export const taskCreateInitialValues: TaskCreateType = {
-  title: "",
-  desription: "",
-  priority: "LOW",
+  title: '',
+  desription: '',
+  priority: 'LOW',
 };

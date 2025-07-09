@@ -1,9 +1,9 @@
-import { useFormik } from "formik";
-import { UserLoginType } from "src/core/types/user.type";
-import { LoginFormData } from "./login-form.data";
-import { loginValidationSchema } from "./login-form.validation";
-import { InputField } from "src/components/common/ui/Input";
-import { Button } from "src/components/common/ui/Button";
+import { useFormik } from 'formik';
+import { UserLoginType } from 'src/core/types/user.type';
+import { LoginFormData } from './login-form.data';
+import { loginValidationSchema } from './login-form.validation';
+import { InputField } from 'src/components/common/ui/Input';
+import { Button } from 'src/components/common/ui/Button';
 
 interface UserLoginProps {
   onSubmit: (values: UserLoginType) => void;
@@ -19,15 +19,15 @@ export default function LoginForm({ onSubmit }: UserLoginProps) {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center pl-64 bg-gradient-to-br from-gray-50 to-white">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 to-white pl-64">
       <form
         onSubmit={formik.handleSubmit}
         className="w-full max-w-lg space-y-8 rounded-3xl border border-gray-100 bg-white p-10 shadow-2xl"
       >
-        <h2 className="text-3xl font-bold text-center text-tamPurple-tam">
+        <h2 className="text-center text-3xl font-bold text-tamPurple-tam">
           Welcome Back
         </h2>
-        <p className="text-center text-gray-500 text-sm">
+        <p className="text-center text-sm text-gray-500">
           Please enter your credentials to continue
         </p>
 
@@ -39,7 +39,9 @@ export default function LoginForm({ onSubmit }: UserLoginProps) {
             value={formik.values.username}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            isValid={formik.touched.username ? !formik.errors.username : undefined}
+            isValid={
+              formik.touched.username ? !formik.errors.username : undefined
+            }
             error={formik.touched.username ? formik.errors.username : ''}
           />
 
@@ -51,7 +53,9 @@ export default function LoginForm({ onSubmit }: UserLoginProps) {
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            isValid={formik.touched.password ? !formik.errors.password : undefined}
+            isValid={
+              formik.touched.password ? !formik.errors.password : undefined
+            }
             error={formik.touched.password ? formik.errors.password : ''}
           />
         </div>
@@ -59,7 +63,7 @@ export default function LoginForm({ onSubmit }: UserLoginProps) {
         <Button
           disabled={!formik.isValid || !formik.dirty}
           type="submit"
-          className="w-full rounded-xl bg-tamPurple-tam py-3 text-white hover:bg-tamPurple-dark transition-all duration-200 disabled:opacity-50"
+          className="hover:bg-tamPurple-dark w-full rounded-xl bg-tamPurple-tam py-3 text-white transition-all duration-200 disabled:opacity-50"
         >
           Login
         </Button>

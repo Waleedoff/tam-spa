@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 /**
  * Admin wrapper that should be protect any page wrapped with Admin wrapper, which a user should have/has admin permissions.
@@ -16,7 +16,7 @@ export default function Admin({ children }: ComponentProps): JSX.Element {
 
   if (!loading && !isAdmin) {
     return (
-      <h4 className="text-center mt-5">you don't have permission to access</h4>
+      <h4 className="mt-5 text-center">you don't have permission to access</h4>
     );
   }
   return !loading ? <div>{children}</div> : <div></div>;

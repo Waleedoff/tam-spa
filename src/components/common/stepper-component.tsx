@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { BiCheck } from "react-icons/bi";
+import { useState } from 'react';
+import { BiCheck } from 'react-icons/bi';
 export interface StepperProps {
   steps: string[];
 }
@@ -26,14 +26,13 @@ const Stepper = (props: StepperProps) => {
                 index < 0 ||
                 index < currentStep ||
                 currentStep === props.steps.length - 1
-                  ? "bg-amber-500 text-white"
-                  : "bg-gray-200 text-gray-600"
+                  ? 'bg-amber-500 text-white'
+                  : 'bg-gray-200 text-gray-600'
                     ? index === currentStep
-                      ? "bg-amber-400 text-white"
-                      : "bg-gray-200 text-gray-600"
-                    : ""
-              }
-                  p-2 w-6 h-6 items-center justify-center flex rounded-full cursor-pointer`}
+                      ? 'bg-amber-400 text-white'
+                      : 'bg-gray-200 text-gray-600'
+                    : ''
+              } flex h-6 w-6 cursor-pointer items-center justify-center rounded-full p-2`}
             >
               {index + 1 ? (
                 index < currentStep ||
@@ -57,8 +56,8 @@ const Stepper = (props: StepperProps) => {
                 <div
                   className={`${
                     index <= currentStep
-                      ? "border border-solid border-amber-500 w-14 h-px"
-                      : "border border-dashed border-spacing-52 border-gray-400 w-14 h-px"
+                      ? 'border-amber-500 h-px w-14 border border-solid'
+                      : 'h-px w-14 border-spacing-52 border border-dashed border-gray-400'
                   }`}
                 ></div>
               )}
@@ -71,7 +70,7 @@ const Stepper = (props: StepperProps) => {
         {currentStep > 0 && (
           <button
             onClick={handlePrevious}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-4"
+            className="mr-4 rounded-lg bg-blue-500 px-4 py-2 text-white"
           >
             Previous
           </button>
@@ -79,7 +78,7 @@ const Stepper = (props: StepperProps) => {
         {currentStep < props.steps.length - 1 && (
           <button
             onClick={handleNext}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            className="rounded-lg bg-blue-500 px-4 py-2 text-white"
           >
             Next
           </button>

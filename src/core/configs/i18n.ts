@@ -1,9 +1,9 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-import { LanguagesEnum } from "../enums/design-system.enum";
-import TranslationAr from "../locales/ar/translation.json";
-import TranslationEn from "../locales/en/translation.json";
+import { LanguagesEnum } from '../enums/design-system.enum';
+import TranslationAr from '../locales/ar/translation.json';
+import TranslationEn from '../locales/en/translation.json';
 
 // the translations
 const resources = {

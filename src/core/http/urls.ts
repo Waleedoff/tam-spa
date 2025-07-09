@@ -8,7 +8,7 @@ type URLs = {
   task: {
     getAllTasks: string;
     createTask: string;
-    updateTask: string 
+    updateTask: string;
   };
 };
 
@@ -20,9 +20,6 @@ export const urls: URLs = {
   task: {
     getAllTasks: `${TamURL}/task`,
     createTask: `${TamURL}/task`,
-    updateTask: `${TamURL}/task`
+    updateTask: `${TamURL}/task`,
   },
 };
-
-
-

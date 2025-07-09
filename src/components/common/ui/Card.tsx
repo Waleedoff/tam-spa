@@ -75,14 +75,12 @@ export const Card = ({
       className={`rounded-xl shadow-md transition hover:shadow-lg ${getSizes()} ${getVariantClasses()} ${props.className ?? ''}`}
     >
       {title && (
-        <div className="flex items-center mb-2 font-semibold">
+        <div className="mb-2 flex items-center font-semibold">
           {icon && <span className="mr-2">{icon}</span>}
           <span>{title}</span>
         </div>
       )}
-      <div className="text-sm text-gray-700">
-        {children}
-      </div>
+      <div className="text-sm text-gray-700">{children}</div>
     </div>
   );
 };

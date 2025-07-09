@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import TaskBoard from "src/components/common/tasks/tasks-board";
-import { getAllTasksService } from "src/services/example-service";
+import { useEffect, useState } from 'react';
+import TaskBoard from 'src/components/common/tasks/tasks-board';
+import { getAllTasksService } from 'src/services/example-service';
 
 type TaskType = {
   id: string;
@@ -20,7 +20,7 @@ export default function Tasks() {
         const result = await getAllTasksService();
         setTasks(result || []);
       } catch (error) {
-        console.error("Failed to fetch tasks", error);
+        console.error('Failed to fetch tasks', error);
       } finally {
         setLoading(false);
       }
@@ -33,8 +33,8 @@ export default function Tasks() {
   const handleStatusChange = (taskId: string, newStatus: string) => {
     setTasks((prev) =>
       prev.map((task) =>
-        task.id === taskId ? { ...task, status: newStatus } : task
-      )
+        task.id === taskId ? { ...task, status: newStatus } : task,
+      ),
     );
 
     // Optionally: Send updated status to your backend here
@@ -43,8 +43,8 @@ export default function Tasks() {
 
   if (loading) {
     return (
-      <div className="pl-64 h-screen flex items-center justify-center">
-        <span className="text-gray-500 text-sm">Loading tasks...</span>
+      <div className="flex h-screen items-center justify-center pl-64">
+        <span className="text-sm text-gray-500">Loading tasks...</span>
       </div>
     );
   }

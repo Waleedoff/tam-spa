@@ -22,24 +22,24 @@ class AppRoutes {
 
   // paths
   getBasePath(): string {
-    return "/";
+    return '/';
   }
   // paths
   getLoginPath(): string {
-    return "/login";
+    return '/login';
   }
   getRegisterPath(): string {
-    return "/register";
+    return '/register';
   }
   getTasksrPath(): string {
-    return "/tasks";
+    return '/tasks';
   }
   getHomePath(): string {
-    return "/home";
+    return '/home';
   }
 
   getMyTasksPath(): string {
-    return "/tasks";
+    return '/tasks';
   }
 
   getExamplePagePath(): string {
@@ -56,7 +56,7 @@ class AppRoutes {
   }
 
   getExampleByIdPageUrl(id: string): string {
-    return this.getExampleByIdPagePath().replace(":id", id);
+    return this.getExampleByIdPagePath().replace(':id', id);
   }
 }
 

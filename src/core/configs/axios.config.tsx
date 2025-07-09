@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 // Set config defaults when creating the instance
 const axiosObject = axios.create();
@@ -6,16 +6,16 @@ const axiosObject = axios.create();
 axiosObject.interceptors.request.use(
   async function (config) {
     // Do something before request is sent such as attaching auth token
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    return config;  
+    return config;
   },
   function (error) {
     // Do something with request error
     // eslint-disable-next-line no-console
-    console.error("error: interceptors", error);
+    console.error('error: interceptors', error);
     return Promise.reject(error);
   },
 );

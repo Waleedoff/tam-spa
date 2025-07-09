@@ -10,27 +10,26 @@ export type StepperProps = {
   desription: string;
 };
 
-
-export type UserLoginType ={
-  username:string;
-  password:string
-}
+export type UserLoginType = {
+  username: string;
+  password: string;
+};
 
 export type TaskCreateType = {
   title: string;
   desription: string;
   priority: string;
-}
+};
 export type TaskEditType = TaskCreateType & {
   id: string;
 };
 
-export type UserRegiterType ={
+export type UserRegiterType = {
   full_name: string;
-  username:string;
-  password:string;
+  username: string;
+  password: string;
   email: string;
-}
+};
 
 export type ParsedTokenType = {
   sub: string;

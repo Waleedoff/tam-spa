@@ -1,6 +1,7 @@
-import { SizesEnum, VariantsEnum, ColorsEnum } from "src/core/enums/tam.enums";
+import { SizesEnum, VariantsEnum, ColorsEnum } from 'src/core/enums/tam.enums';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: SizesEnum;
   variant?: VariantsEnum;
   color?: ColorsEnum;

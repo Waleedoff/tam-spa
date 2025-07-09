@@ -1,4 +1,3 @@
-
 import { ColorsEnum, SizesEnum, VariantsEnum } from 'src/core/enums/tam.enums';
 // import ComponentLoader from './componentLoader';
 // import './dynamic-classes';
@@ -79,12 +78,12 @@ export const Button = ({
   return (
     <button
       {...props}
-      className={`relative inline-flex items-center ${getSizes()} ${getVariantWithColor()} justify-center rounded-btn-custom disabled:cursor-not-allowed disabled:opacity-40 ${
+      className={`relative inline-flex items-center ${getSizes()} ${getVariantWithColor()} rounded-btn-custom justify-center disabled:cursor-not-allowed disabled:opacity-40 ${
         props.className ?? ''
       }`}
     >
       {isLoading && (
-        <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-btn-custom bg-black bg-opacity-30">
+        <div className="rounded-btn-custom absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-30">
           <div className="absolute w-9">
             {/* <ComponentLoader color={ColorsEnum.Muted} /> */}
           </div>

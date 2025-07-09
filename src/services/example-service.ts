@@ -1,19 +1,20 @@
-import { makeRequest } from "src/core/data-access/http.service";
-import { HttpMethods } from "src/core/enums/httpMethods.enum";
-import { urls } from "src/core/http/urls";
-import { TaskCreateType, UserLoginType, UserRegiterType } from "src/core/types/user.type";
+import { makeRequest } from 'src/core/data-access/http.service';
+import { HttpMethods } from 'src/core/enums/httpMethods.enum';
+import { urls } from 'src/core/http/urls';
+import {
+  TaskCreateType,
+  UserLoginType,
+  UserRegiterType,
+} from 'src/core/types/user.type';
 
 export const getData = () => {
   return makeRequest({
-    url: "",
+    url: '',
     method: HttpMethods.GET,
   });
 };
 
-
-export const postLoginService = async (
-  data: UserLoginType
-) => {
+export const postLoginService = async (data: UserLoginType) => {
   return makeRequest({
     url: urls.auth.login,
     method: HttpMethods.POST,
@@ -24,15 +25,13 @@ export const postLoginService = async (
   });
 };
 
-export const postRegisterService = async (
-  data: UserRegiterType) => {
+export const postRegisterService = async (data: UserRegiterType) => {
   return makeRequest({
     url: urls.auth.userRegister,
     method: HttpMethods.POST,
     data,
   });
-}
-
+};
 
 export const getAllTasksService = async () => {
   return makeRequest({
@@ -40,7 +39,6 @@ export const getAllTasksService = async () => {
     method: HttpMethods.GET,
   });
 };
-
 
 export const postCreateTaskService = async (data: TaskCreateType) => {
   return makeRequest({
@@ -50,8 +48,10 @@ export const postCreateTaskService = async (data: TaskCreateType) => {
   });
 };
 
-
-export const putUpdateTaskService = async (id: string, data: TaskCreateType) => {
+export const putUpdateTaskService = async (
+  id: string,
+  data: TaskCreateType,
+) => {
   return makeRequest({
     url: `${urls.task.updateTask}/${id}`,
     method: HttpMethods.PUT,

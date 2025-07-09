@@ -1,5 +1,9 @@
-import { HiOutlineCheckCircle, HiOutlineExclamationCircle } from 'react-icons/hi';
-export interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+import {
+  HiOutlineCheckCircle,
+  HiOutlineExclamationCircle,
+} from 'react-icons/hi';
+export interface InputFieldProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   isValid?: boolean;
   hint?: string;
   error?: string;
@@ -49,10 +53,18 @@ export function InputField({
   return (
     <div className="mb-4 w-full">
       {label && (
-        <label className={`mb-2 block text-sm font-semibold ${getErrorColor()}`}>{label}</label>
+        <label
+          className={`mb-2 block text-sm font-semibold ${getErrorColor()}`}
+        >
+          {label}
+        </label>
       )}
       <div className="relative">
-        {startIcon && <div className="absolute right-3 top-1/2 -translate-y-1/2">{startIcon}</div>}
+        {startIcon && (
+          <div className="absolute right-3 top-1/2 -translate-y-1/2">
+            {startIcon}
+          </div>
+        )}
         <input
           {...props}
           className={`w-full rounded-[3px] border bg-white p-2 text-sm text-gray-800 ${getValidationClass()} ${props.className ?? ''}`}
