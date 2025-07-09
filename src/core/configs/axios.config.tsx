@@ -6,17 +6,11 @@ const axiosObject = axios.create();
 axiosObject.interceptors.request.use(
   async function (config) {
     // Do something before request is sent such as attaching auth token
-    /*
+    const token = localStorage.getItem("token")
     if (token) {
-      config = {
-        ...config,
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      };
+      config.headers.Authorization = `Bearer ${token}`;
     }
-    */
-    return config;
+    return config;  
   },
   function (error) {
     // Do something with request error

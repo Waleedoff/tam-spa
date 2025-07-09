@@ -24,6 +24,23 @@ class AppRoutes {
   getBasePath(): string {
     return "/";
   }
+  // paths
+  getLoginPath(): string {
+    return "/login";
+  }
+  getRegisterPath(): string {
+    return "/register";
+  }
+  getTasksrPath(): string {
+    return "/tasks";
+  }
+  getHomePath(): string {
+    return "/home";
+  }
+
+  getMyTasksPath(): string {
+    return "/tasks";
+  }
 
   getExamplePagePath(): string {
     return `/address/:addressId/view`;

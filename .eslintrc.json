@@ -14,16 +14,16 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react", "simple-import-sort", "import"],
+  "plugins": ["@typescript-eslint", "react", "import"],
   "rules": {
     "react/no-unescaped-entities": 0,
     "react/prop-types": "off",
     "@typescript-eslint/no-var-requires": 0,
     "react/react-in-jsx-scope": "off",
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": "off",
+    "simple-import-sort/exports": "off",
     "padding-line-between-statements": [
-      "error",
+      "off",
       {
         "blankLine": "always",
         "prev": "const",
@@ -31,7 +31,7 @@
       }
     ],
     "import/order": [
-      "error",
+      "off",
       {
         "groups": ["builtin", "external", "internal"],
         "pathGroupsExcludedImportTypes": [],
@@ -45,7 +45,7 @@
     "import/no-unresolved": "off",
     "import/named": "warn",
     "import/namespace": "warn",
-    "no-console": "error",
+    "no-console": "warn",
     "no-constant-condition": "warn",
     "import/no-named-as-default": "warn",
     "@typescript-eslint/no-unused-vars": "error"

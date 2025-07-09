@@ -1,11 +1,15 @@
 import React from "react";
 import { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import App from "./App";
 import { appRoutesObj } from "./app.paths";
+import TasksPage from "./pages/user/tasks-page/tasks-page";
+import HomePage from "./pages/user/home/home-page";
 
 const ExamplePage = React.lazy(() => import("./pages/user/example-page"));
+const LoginPage = React.lazy(() => import("./pages/user/login-page/login-page"));
+const RegisterPage = React.lazy(()=> import("./pages/user/register-page/register-page"));
+
 const NotFoundPage = React.lazy(() => import("./pages/404"));
 
 const withSuspense = (WrappedComponent: JSX.Element) => {
@@ -23,18 +27,36 @@ export function AppRouting() {
     <Suspense
       fallback={<div className="text-primary-200 pt-10">Loading...</div>}
     >
-      <BrowserRouter>
         <Routes>
-          <Route
-            key="homepage"
-            path={appRoutesObj.getBasePath()}
-            element={withSuspense(<App />)}
-          />
-
           <Route
             key="examplePage"
             path={appRoutesObj.getExamplePagePath()}
             element={withSuspense(<ExamplePage />)}
+          />
+
+          <Route
+            key="homePage"
+            path={appRoutesObj.getHomePath()}
+            element={withSuspense(<HomePage />)}
+          />
+
+
+          <Route
+            key="loginPage"
+            path={appRoutesObj.getLoginPath()}
+            element={withSuspense(<LoginPage />)}
+          />
+
+          <Route
+            key="registerPage"
+            path={appRoutesObj.getRegisterPath()}
+            element={withSuspense(<RegisterPage />)}
+          />
+
+          <Route
+            key="tasksPage"
+            path={appRoutesObj.getTasksrPath()}
+            element={withSuspense(<TasksPage />)}
           />
 
           <Route
@@ -43,7 +65,6 @@ export function AppRouting() {
             element={withSuspense(<NotFoundPage />)}
           />
         </Routes>
-      </BrowserRouter>
     </Suspense>
   );
 }

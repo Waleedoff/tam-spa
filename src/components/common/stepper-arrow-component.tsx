@@ -58,7 +58,7 @@ const StepperArrow = (props: Iitem) => {
             `}
             >
               <div className="text-sm text-left">{step.title}</div>
-              <div className="text-xs text-left">{step.description}</div>
+              <div className="text-xs text-left">{step.desription}</div>
             </li>
           </div>
         ))}

@@ -1,0 +1,28 @@
+const TamURL = process.env['REACT_APP_TAM_BACKEND_SERVICE_LINK'];
+
+type URLs = {
+  auth: {
+    userRegister: string;
+    login: string;
+  };
+  task: {
+    getAllTasks: string;
+    createTask: string;
+    updateTask: string 
+  };
+};
+
+export const urls: URLs = {
+  auth: {
+    userRegister: `${TamURL}/auth/register`,
+    login: `${TamURL}/auth/login`,
+  },
+  task: {
+    getAllTasks: `${TamURL}/task`,
+    createTask: `${TamURL}/task`,
+    updateTask: `${TamURL}/task`
+  },
+};
+
+
+

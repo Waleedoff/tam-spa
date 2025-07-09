@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        modern: ['Inter', 'sans-serif'],
+      },
       colors: {
         primary: {
           50: "#F59E0B",
@@ -13,6 +16,14 @@ module.exports = {
         White: {
           DEFAULT: "#FFFFFF",
         },
+        tamPurple: {
+          tam: "#2a2656"
+        },
+        tamYellow: "#FCD34D",
+        tamBlue: "#60A5FA",
+        tamGreen: "#34D399",
+        
+        
         screens: {
           mobile: { max: "767px" },
           tablet: { min: "768px", max: "1023px" },

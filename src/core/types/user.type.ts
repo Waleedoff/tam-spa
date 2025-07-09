@@ -7,5 +7,31 @@ export type TapsModel = {
 
 export type StepperProps = {
   title: string;
-  description: string;
+  desription: string;
+};
+
+
+export type UserLoginType ={
+  username:string;
+  password:string
+}
+
+export type TaskCreateType = {
+  title: string;
+  desription: string;
+  priority: string;
+}
+export type TaskEditType = TaskCreateType & {
+  id: string;
+};
+
+export type UserRegiterType ={
+  full_name: string;
+  username:string;
+  password:string;
+  email: string;
+}
+
+export type ParsedTokenType = {
+  sub: string;
 };

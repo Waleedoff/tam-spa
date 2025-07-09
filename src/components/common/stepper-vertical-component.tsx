@@ -23,7 +23,7 @@ const StepperVertical = (props: Iitem) => {
           <div className="flex justify-center gap-2" key={index}>
             <div className="flex flex-col text-left">
               <div className="text-sm">{step.title}</div>
-              <div className="text-xs">{step.description}</div>
+              <div className="text-xs">{step.desription}</div>
             </div>
             <div className="flex flex-col gap-1 mb-1 justify-center items-center">
               <div

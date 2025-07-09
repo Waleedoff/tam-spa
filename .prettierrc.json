@@ -1,0 +1,9 @@
+{
+  "singleQuote": true,
+  "semi": true,
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "jsxBracketSameLine": false,
+  "arrowParens": "always",
+  "plugins": ["prettier-plugin-tailwindcss"]
+}
