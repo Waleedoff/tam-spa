@@ -4,6 +4,8 @@ import { TaskCard } from './tasks-card';
 import { Button } from '../Button';
 import { Search } from 'lucide-react';
 import TaskCreate from 'src/containers/user/tasks/TaskCreate';
+import { deleteTaskService } from 'src/services/example-service';
+// import TaskEdit from "src/containers/user/tasks/TaskEdit";
 
 interface TaskType {
   id: string;
@@ -20,10 +22,13 @@ interface TaskBoardProps {
   onStatusChange: (taskId: string, newStatus: string) => void;
 }
 
+
 export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
   const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
+//   const [editingTask, setEditingTask] = useState<TaskType | null>(null);
+
 
   const columns = [
     {
@@ -49,11 +54,28 @@ export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
     onStatusChange(draggableId, destination.droppableId);
   };
 
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this task?")) return;
+  
+    try {
+      await deleteTaskService(id);
+      console.log("Task deleted:", id);
+      window.location.reload();
+      // Optionally: refresh tasks or update local state
+    } catch (err) {
+      console.error("Error deleting task:", err);
+    }
+  };
+
+//   const handleEdit = (task: TaskType) => {
+//     setEditingTask(task);
+//   };
   return (
     <div className="min-h-screen space-x-8 bg-gray-50 px-6 py-10 pl-64">
       {/* Header */}
       <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
-        <h2 className="font-sans text-3xl font-bold text-tamPurple-tam ml-6">
+        <h2 className="ml-6 font-sans text-3xl font-bold text-tamPurple-tam">
           {showSearch ? (
             <input
               type="text"
@@ -103,6 +125,9 @@ export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
         </div>
       )}
 
+      
+      
+
       {/* Task Columns */}
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -141,6 +166,7 @@ export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
                               {...provided.dragHandleProps}
                             >
                               <TaskCard
+                              onDelete={handleDelete}
                                 id={task.id}
                                 title={task.title}
                                 desription={task.desription}

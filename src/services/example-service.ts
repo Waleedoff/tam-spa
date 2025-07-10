@@ -53,8 +53,16 @@ export const putUpdateTaskService = async (
   data: TaskCreateType,
 ) => {
   return makeRequest({
-    url: `${urls.task.updateTask}/${id}`,
+    url: `${urls.task.updateTask}/${id}/edit`,
     method: HttpMethods.PUT,
     data,
   });
 };
+
+export const deleteTaskService = async (id: string) => {
+  return makeRequest({
+    url: `${urls.task.updateTask}/${id}`, // or urls.task.deleteTask if you have one
+    method: HttpMethods.PUT, // use HttpMethods.DELETE if your backend supports it
+  });
+};
+

@@ -1,4 +1,4 @@
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from 'lucide-react';
 
 interface TaskCardProps {
   id: string;
@@ -22,30 +22,30 @@ export function TaskCard({
   onDelete,
 }: TaskCardProps) {
   const priorityColors: Record<string, string> = {
-    LOW: "bg-teal-500",
-    MEDIUM: "bg-orange-500",
-    HIGH: "bg-rose-500",
+    LOW: 'bg-teal-500',
+    MEDIUM: 'bg-orange-500',
+    HIGH: 'bg-rose-500',
   };
 
-  const priorityColor = priorityColors[priority.toUpperCase()] || "bg-gray-300";
+  const priorityColor = priorityColors[priority.toUpperCase()] || 'bg-gray-300';
 
   return (
-    <div className="relative rounded-lg border bg-white p-4 shadow group">
+    <div className="group relative rounded-lg border bg-white p-4 shadow">
       {/* Top-right action buttons */}
-      <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="absolute right-2 top-2 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
         <button
           onClick={() => onEdit?.(id)}
           className="text-gray-500 hover:text-tamPurple-tam"
           title="Edit"
         >
-          <Pencil className="w-4 h-4" />
+          <Pencil className="h-4 w-4" />
         </button>
         <button
           onClick={() => onDelete?.(id)}
           className="text-gray-500 hover:text-red-600"
           title="Delete"
         >
-          <Trash2 className="w-4 h-4" />
+          <Trash2 className="h-4 w-4" />
         </button>
       </div>
 

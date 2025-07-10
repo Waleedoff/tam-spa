@@ -1,21 +1,18 @@
 // src/components/tasks/task-create-form/task-create-form.tsx
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 
-import { InputField } from 'src/components/common/ui/Input';
-import { Button } from 'src/components/common/ui/Button';
-import { TaskCreateType } from 'src/core/types/user.type';
-import { taskCreateInitialValues } from './task-create-form.data';
-import { taskCreateValidationSchema } from './task-form.validation';
+import { InputField } from "src/components/common/ui/Input";
+import { Button } from "src/components/common/ui/Button";
+import { TaskCreateType } from "src/core/types/user.type";
+import { taskCreateInitialValues } from "./task-create-form.data";
+import { taskCreateValidationSchema } from "./task-form.validation";
 
 interface TaskCreateFormProps {
   onSubmit: (values: TaskCreateType) => void;
   onClose: () => void;
 }
 
-export default function TaskCreateForm({
-  onSubmit,
-  onClose,
-}: TaskCreateFormProps) {
+export default function TaskCreateForm({ onSubmit, onClose }: TaskCreateFormProps) {
   const formik = useFormik<TaskCreateType>({
     initialValues: taskCreateInitialValues,
     validationSchema: taskCreateValidationSchema,
@@ -24,9 +21,7 @@ export default function TaskCreateForm({
 
   return (
     <form onSubmit={formik.handleSubmit} className="space-y-4 p-6">
-      <h2 className="text-xl font-semibold text-tamPurple-tam">
-        Create New Task
-      </h2>
+      <h2 className="text-xl font-semibold text-tamPurple-tam">Create New Task</h2>
 
       <InputField
         name="title"
@@ -36,7 +31,7 @@ export default function TaskCreateForm({
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         isValid={formik.touched.title ? !formik.errors.title : undefined}
-        error={formik.touched.title ? formik.errors.title : ''}
+        error={formik.touched.title ? formik.errors.title : ""}
       />
 
       <InputField
@@ -46,10 +41,8 @@ export default function TaskCreateForm({
         value={formik.values.desription}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        isValid={
-          formik.touched.desription ? !formik.errors.desription : undefined
-        }
-        error={formik.touched.desription ? formik.errors.desription : ''}
+        isValid={formik.touched.desription ? !formik.errors.desription : undefined}
+        error={formik.touched.desription ? formik.errors.desription : ""}
       />
 
       <InputField
@@ -60,15 +53,11 @@ export default function TaskCreateForm({
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         isValid={formik.touched.priority ? !formik.errors.priority : undefined}
-        error={formik.touched.priority ? formik.errors.priority : ''}
+        error={formik.touched.priority ? formik.errors.priority : ""}
       />
 
       <div className="flex justify-end gap-2">
-        <Button
-          type="button"
-          onClick={onClose}
-          className="bg-gray-200 text-black"
-        >
+        <Button type="button" onClick={onClose} className="bg-gray-200 text-black">
           Cancel
         </Button>
         <Button type="submit" className="bg-tamPurple-tam text-white">
