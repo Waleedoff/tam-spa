@@ -1,32 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { TaskCard } from './tasks-card';
 import { Button } from '../Button';
 import { Search } from 'lucide-react';
-import TaskCreate from 'src/containers/user/tasks/TaskCreate';
-import { deleteTaskService } from 'src/services/example-service';
+import { deleteTaskService, getAllTasksService, postCreateTaskService, putUpdateStatusTaskService, putUpdateTaskService } from 'src/services/example-service';
+import { TaskCreateType } from 'src/core/types/user.type';
+import { taskCreateInitialValues } from './task-create-form.data';
+import TaskCreateForm from './TaskForm';
 // import TaskEdit from "src/containers/user/tasks/TaskEdit";
 
-interface TaskType {
-  id: string;
-  title: string;
-  desription?: string;
-  status: string;
-  priority: string;
-  commentsCount?: number;
-  people?: string[];
-}
 
-interface TaskBoardProps {
-  tasks: TaskType[];
-  onStatusChange: (taskId: string, newStatus: string) => void;
-}
-
-
-export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
+export default function TaskBoard() {
   const [showModal, setShowModal] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
+  const [tasks, setTasks] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
+  const [id,setId] =useState("")
+
 //   const [editingTask, setEditingTask] = useState<TaskType | null>(null);
 
 
@@ -48,10 +40,46 @@ export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
     },
   ];
 
+
+    const fetchTasks = async () => {
+      try {
+        const result = await getAllTasksService(searchQuery);
+        setTasks(result || []);
+      } catch (error) {
+        console.error('Failed to fetch tasks', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+
+    const handleUpdateStatusTask = async (id:string,status:string) => {
+      try{
+        await putUpdateStatusTaskService(id,status);
+        fetchTasks();
+      } catch (error) {
+        console.error('Failed to create task:', error);
+      }
+    };
+
+      // This is what updates the task's status when dragged between columns
+      const handleStatusChange = (taskId: string, newStatus: string) => {
+        setTasks((prev:any) =>
+          prev.map((task:any) =>
+            task.id === taskId ? { ...task, status: newStatus } : task,
+          ),
+        );
+        handleUpdateStatusTask(taskId,newStatus)
+
+    // Optionally: Send updated status to your backend here
+    // await updateTaskStatus(taskId, newStatus);
+  };
+
   const onDragEnd = (result: any) => {
     const { destination, source, draggableId } = result;
     if (!destination || destination.droppableId === source.droppableId) return;
-    onStatusChange(draggableId, destination.droppableId);
+    handleStatusChange(draggableId, destination.droppableId);
+    
   };
 
 
@@ -60,14 +88,43 @@ export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
   
     try {
       await deleteTaskService(id);
-      console.log("Task deleted:", id);
-      window.location.reload();
+      console.log("Task deleted:", id);fetchTasks();
+      fetchTasks();
       // Optionally: refresh tasks or update local state
     } catch (err) {
       console.error("Error deleting task:", err);
     }
   };
 
+  const handleSubmit = async (data: TaskCreateType) => {
+    try {
+      await postCreateTaskService(data);
+      console.log(data);
+      fetchTasks();
+    } catch (error) {
+      console.error('Failed to create task:', error);
+    }
+  };
+
+  const handleEdit = async (id:string,data:TaskCreateType,) => {
+    try {
+      await putUpdateTaskService(id,data);
+      fetchTasks();
+    } catch (error) {
+      console.error('Failed to create task:', error);
+    }
+  };
+  
+
+
+
+  useEffect(() => {
+    fetchTasks();
+  }, [searchQuery]);
+
+  if(loading) {
+    return <div>Loading ... </div>
+  }
 //   const handleEdit = (task: TaskType) => {
 //     setEditingTask(task);
 //   };
@@ -81,6 +138,7 @@ export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
               type="text"
               placeholder="Search tasks..."
               value={searchQuery}
+              
               onChange={(e) => setSearchQuery(e.target.value)}
               onBlur={() => {
                 if (!searchQuery) setShowSearch(false);
@@ -115,25 +173,25 @@ export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
           <div className="w-full max-w-md rounded-xl bg-white shadow-lg">
-            <TaskCreate
-              onSuccess={() => {
+            <TaskCreateForm
+              onSubmit={async (values) => {
+                await handleSubmit(values);
                 setShowModal(false);
-              }}
+              } }
               onClose={() => setShowModal(false)}
-            />
+              data={taskCreateInitialValues} 
+              title={'Create Task'}            
+              />
           </div>
         </div>
       )}
-
-      
-      
 
       {/* Task Columns */}
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {columns.map((col) => {
             const filteredTasks = tasks.filter(
-              (t) =>
+              (t:any) =>
                 t.status === col.status &&
                 t.title.toLowerCase().includes(searchQuery.toLowerCase()),
             );
@@ -153,7 +211,7 @@ export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
                       ref={provided.innerRef}
                       {...provided.droppableProps}
                     >
-                      {filteredTasks.map((task, index) => (
+                      {filteredTasks.map((task:any, index:any) => (
                         <Draggable
                           key={task.id}
                           draggableId={task.id}
@@ -166,11 +224,12 @@ export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
                               {...provided.dragHandleProps}
                             >
                               <TaskCard
-                              onDelete={handleDelete}
-                                id={task.id}
-                                title={task.title}
-                                desription={task.desription}
-                                priority={task.priority}
+                                onDelete={handleDelete}
+                                onEdit={() => {
+                                  setId(task.id);
+                                  setShowModalEdit(true);
+                                }}
+                                data={task}
                                 status={task.status}
                                 commentsCount={task.commentsCount}
                                 people={task.people}
@@ -193,6 +252,21 @@ export default function TaskBoard({ tasks, onStatusChange }: TaskBoardProps) {
           })}
         </div>
       </DragDropContext>
+      {showModalEdit && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+          <div className="w-full max-w-md rounded-xl bg-white shadow-lg">
+            <TaskCreateForm
+              onSubmit={async (updatedData) => {
+                await handleEdit(id, updatedData);
+                setShowModalEdit(false);
+              } }
+              onClose={() => setShowModalEdit(false)}
+              data={tasks.find((t: any) => t.id === id)} 
+              title={'Edit Task'}     
+                        />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

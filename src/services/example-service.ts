@@ -33,10 +33,11 @@ export const postRegisterService = async (data: UserRegiterType) => {
   });
 };
 
-export const getAllTasksService = async () => {
+export const getAllTasksService = async (q:string) => {
   return makeRequest({
     url: urls.task.getAllTasks,
     method: HttpMethods.GET,
+    params:{q}
   });
 };
 
@@ -63,6 +64,14 @@ export const deleteTaskService = async (id: string) => {
   return makeRequest({
     url: `${urls.task.updateTask}/${id}`, // or urls.task.deleteTask if you have one
     method: HttpMethods.PUT, // use HttpMethods.DELETE if your backend supports it
+  });
+};
+export const putUpdateStatusTaskService = async (task_id: string,status:string) => {
+  return makeRequest({
+    url: `${urls.task.updateStatusTask(task_id)}`, 
+    method: HttpMethods.PUT,
+    params:{status}
+
   });
 };
 

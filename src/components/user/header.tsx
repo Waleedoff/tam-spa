@@ -67,7 +67,7 @@ export default function Sidebar() {
       </div>
 
       {/* Bottom Section - Auth Info */}
-      <div className="border-t border-white/10 p-6">
+      <div className="border-t border-white/10 p-6 space-y-3">
         {!isLoggedIn ? (
           <Button
             onClick={() => navigate(appRoutesObj.getLoginPath())}
@@ -77,10 +77,29 @@ export default function Sidebar() {
           >
             Login
           </Button>
+          
+          
         ) : (
           <p className="text-sm text-white">
             Welcome,{' '}
             <span className="font-semibold">{tokenData?.sub ?? 'User'}</span>
+          </p>
+        )}
+          {!isLoggedIn ? (
+          <Button
+            onClick={() => navigate(appRoutesObj.getRegisterPath())}
+            size={SizesEnum.Medium}
+            variant={VariantsEnum.Outline}
+            className=" w-full !rounded-xl border-white text-white transition hover:bg-white hover:text-tamPurple-tam"
+          >
+            Register
+          </Button>
+          
+          
+        ) : (
+          <p >
+          
+          
           </p>
         )}
       </div>

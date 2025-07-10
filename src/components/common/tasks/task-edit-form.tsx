@@ -21,6 +21,7 @@ export default function TaskEditForm({ initialValues, onSubmit, onClose }: TaskE
     <form onSubmit={formik.handleSubmit} className="space-y-4 p-6">
       <h2 className="text-xl font-semibold text-tamPurple-tam">Edit Task</h2>
 
+      {/* Title input */}
       <InputField
         name="title"
         label="Title"
@@ -31,6 +32,7 @@ export default function TaskEditForm({ initialValues, onSubmit, onClose }: TaskE
         error={formik.touched.title ? formik.errors.title : ""}
       />
 
+      {/* Description input */}
       <InputField
         name="desription"
         label="Description"
@@ -41,9 +43,13 @@ export default function TaskEditForm({ initialValues, onSubmit, onClose }: TaskE
         error={formik.touched.desription ? formik.errors.desription : ""}
       />
 
-      <div>
-        <label className="block font-medium mb-1">Priority</label>
+      {/* ✅ Native select dropdown for priority */}
+      <select>
+        <label htmlFor="priority" className="block font-medium mb-1">
+          Priorityddfd
+        </label>
         <select
+          id="priority"
           name="priority"
           value={formik.values.priority}
           onChange={formik.handleChange}
@@ -56,9 +62,11 @@ export default function TaskEditForm({ initialValues, onSubmit, onClose }: TaskE
           <option value="HIGH">HIGH</option>
         </select>
         {formik.touched.priority && formik.errors.priority && (
-          <div className="text-red-500 text-sm mt-1">{formik.errors.priority}</div>
+          <div className="text-red-500 text-sm mt-1">
+            {formik.errors.priority}
+          </div>
         )}
-      </div>
+      </select>
 
       <div className="flex justify-end gap-2">
         <Button type="button" onClick={onClose} className="bg-gray-200 text-black">
