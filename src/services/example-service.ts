@@ -33,11 +33,11 @@ export const postRegisterService = async (data: UserRegiterType) => {
   });
 };
 
-export const getAllTasksService = async (q:string) => {
+export const getAllTasksService = async (q: string) => {
   return makeRequest({
     url: urls.task.getAllTasks,
     method: HttpMethods.GET,
-    params:{q}
+    params: { q },
   });
 };
 
@@ -66,12 +66,13 @@ export const deleteTaskService = async (id: string) => {
     method: HttpMethods.PUT, // use HttpMethods.DELETE if your backend supports it
   });
 };
-export const putUpdateStatusTaskService = async (task_id: string,status:string) => {
+export const putUpdateStatusTaskService = async (
+  task_id: string,
+  status: string,
+) => {
   return makeRequest({
-    url: `${urls.task.updateStatusTask(task_id)}`, 
+    url: `${urls.task.updateStatusTask(task_id)}`,
     method: HttpMethods.PUT,
-    params:{status}
-
+    params: { status },
   });
 };
-

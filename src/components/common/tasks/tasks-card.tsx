@@ -2,7 +2,7 @@ import { Pencil, Trash2 } from 'lucide-react';
 import { TaskCreateType } from 'src/core/types/user.type';
 
 interface TaskCardProps {
-  data:TaskCreateType
+  data: TaskCreateType;
   status: string;
   commentsCount?: number;
   people?: string[];
@@ -11,7 +11,7 @@ interface TaskCardProps {
 }
 
 export function TaskCard({
-  data, 
+  data,
   commentsCount,
   onEdit,
   onDelete,
@@ -22,7 +22,8 @@ export function TaskCard({
     HIGH: 'bg-rose-500',
   };
 
-  const priorityColor = priorityColors[data.priority.toUpperCase()] || 'bg-gray-300';
+  const priorityColor =
+    priorityColors[data.priority.toUpperCase()] || 'bg-gray-300';
 
   return (
     <div className="group relative rounded-lg border bg-white p-4 shadow">
@@ -45,8 +46,12 @@ export function TaskCard({
       </div>
 
       {/* Card content */}
-      <h4 className="mb-1 text-sm font-semibold text-tamPurple-tam">{data.title}</h4>
-      {data.desription && <p className="mb-2 text-sm text-gray-600">{data.desription}</p>}
+      <h4 className="mb-1 text-sm font-semibold text-tamPurple-tam">
+        {data.title}
+      </h4>
+      {data.desription && (
+        <p className="mb-2 text-sm text-gray-600">{data.desription}</p>
+      )}
 
       <div className="flex items-center justify-between text-xs text-gray-500">
         <span className="flex items-center gap-1 capitalize">

@@ -3,12 +3,17 @@ import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { TaskCard } from './tasks-card';
 import { Button } from '../Button';
 import { Search } from 'lucide-react';
-import { deleteTaskService, getAllTasksService, postCreateTaskService, putUpdateStatusTaskService, putUpdateTaskService } from 'src/services/example-service';
+import {
+  deleteTaskService,
+  getAllTasksService,
+  postCreateTaskService,
+  putUpdateStatusTaskService,
+  putUpdateTaskService,
+} from 'src/services/example-service';
 import { TaskCreateType } from 'src/core/types/user.type';
 import { taskCreateInitialValues } from './task-create-form.data';
 import TaskCreateForm from './TaskForm';
 // import TaskEdit from "src/containers/user/tasks/TaskEdit";
-
 
 export default function TaskBoard() {
   const [showModal, setShowModal] = useState(false);
@@ -17,10 +22,9 @@ export default function TaskBoard() {
   const [showSearch, setShowSearch] = useState(false);
   const [tasks, setTasks] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  const [id,setId] =useState("")
+  const [id, setId] = useState('');
 
-//   const [editingTask, setEditingTask] = useState<TaskType | null>(null);
-
+  //   const [editingTask, setEditingTask] = useState<TaskType | null>(null);
 
   const columns = [
     {
@@ -40,36 +44,34 @@ export default function TaskBoard() {
     },
   ];
 
+  const fetchTasks = async () => {
+    try {
+      const result = await getAllTasksService(searchQuery);
+      setTasks(result || []);
+    } catch (error) {
+      console.error('Failed to fetch tasks', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const fetchTasks = async () => {
-      try {
-        const result = await getAllTasksService(searchQuery);
-        setTasks(result || []);
-      } catch (error) {
-        console.error('Failed to fetch tasks', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const handleUpdateStatusTask = async (id: string, status: string) => {
+    try {
+      await putUpdateStatusTaskService(id, status);
+      fetchTasks();
+    } catch (error) {
+      console.error('Failed to create task:', error);
+    }
+  };
 
-
-    const handleUpdateStatusTask = async (id:string,status:string) => {
-      try{
-        await putUpdateStatusTaskService(id,status);
-        fetchTasks();
-      } catch (error) {
-        console.error('Failed to create task:', error);
-      }
-    };
-
-      // This is what updates the task's status when dragged between columns
-      const handleStatusChange = (taskId: string, newStatus: string) => {
-        setTasks((prev:any) =>
-          prev.map((task:any) =>
-            task.id === taskId ? { ...task, status: newStatus } : task,
-          ),
-        );
-        handleUpdateStatusTask(taskId,newStatus)
+  // This is what updates the task's status when dragged between columns
+  const handleStatusChange = (taskId: string, newStatus: string) => {
+    setTasks((prev: any) =>
+      prev.map((task: any) =>
+        task.id === taskId ? { ...task, status: newStatus } : task,
+      ),
+    );
+    handleUpdateStatusTask(taskId, newStatus);
 
     // Optionally: Send updated status to your backend here
     // await updateTaskStatus(taskId, newStatus);
@@ -79,20 +81,19 @@ export default function TaskBoard() {
     const { destination, source, draggableId } = result;
     if (!destination || destination.droppableId === source.droppableId) return;
     handleStatusChange(draggableId, destination.droppableId);
-    
   };
 
-
   const handleDelete = async (id: string) => {
-    if (!window.confirm("Are you sure you want to delete this task?")) return;
-  
+    if (!window.confirm('Are you sure you want to delete this task?')) return;
+
     try {
       await deleteTaskService(id);
-      console.log("Task deleted:", id);fetchTasks();
+      console.log('Task deleted:', id);
+      fetchTasks();
       fetchTasks();
       // Optionally: refresh tasks or update local state
     } catch (err) {
-      console.error("Error deleting task:", err);
+      console.error('Error deleting task:', err);
     }
   };
 
@@ -106,28 +107,25 @@ export default function TaskBoard() {
     }
   };
 
-  const handleEdit = async (id:string,data:TaskCreateType,) => {
+  const handleEdit = async (id: string, data: TaskCreateType) => {
     try {
-      await putUpdateTaskService(id,data);
+      await putUpdateTaskService(id, data);
       fetchTasks();
     } catch (error) {
       console.error('Failed to create task:', error);
     }
   };
-  
-
-
 
   useEffect(() => {
     fetchTasks();
   }, [searchQuery]);
 
-  if(loading) {
-    return <div>Loading ... </div>
+  if (loading) {
+    return <div>Loading ... </div>;
   }
-//   const handleEdit = (task: TaskType) => {
-//     setEditingTask(task);
-//   };
+  //   const handleEdit = (task: TaskType) => {
+  //     setEditingTask(task);
+  //   };
   return (
     <div className="min-h-screen space-x-8 bg-gray-50 px-6 py-10 pl-64">
       {/* Header */}
@@ -138,7 +136,6 @@ export default function TaskBoard() {
               type="text"
               placeholder="Search tasks..."
               value={searchQuery}
-              
               onChange={(e) => setSearchQuery(e.target.value)}
               onBlur={() => {
                 if (!searchQuery) setShowSearch(false);
@@ -177,11 +174,11 @@ export default function TaskBoard() {
               onSubmit={async (values) => {
                 await handleSubmit(values);
                 setShowModal(false);
-              } }
+              }}
               onClose={() => setShowModal(false)}
-              data={taskCreateInitialValues} 
-              title={'Create Task'}            
-              />
+              data={taskCreateInitialValues}
+              title={'Create Task'}
+            />
           </div>
         </div>
       )}
@@ -191,7 +188,7 @@ export default function TaskBoard() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {columns.map((col) => {
             const filteredTasks = tasks.filter(
-              (t:any) =>
+              (t: any) =>
                 t.status === col.status &&
                 t.title.toLowerCase().includes(searchQuery.toLowerCase()),
             );
@@ -211,7 +208,7 @@ export default function TaskBoard() {
                       ref={provided.innerRef}
                       {...provided.droppableProps}
                     >
-                      {filteredTasks.map((task:any, index:any) => (
+                      {filteredTasks.map((task: any, index: any) => (
                         <Draggable
                           key={task.id}
                           draggableId={task.id}
@@ -259,11 +256,11 @@ export default function TaskBoard() {
               onSubmit={async (updatedData) => {
                 await handleEdit(id, updatedData);
                 setShowModalEdit(false);
-              } }
+              }}
               onClose={() => setShowModalEdit(false)}
-              data={tasks.find((t: any) => t.id === id)} 
-              title={'Edit Task'}     
-                        />
+              data={tasks.find((t: any) => t.id === id)}
+              title={'Edit Task'}
+            />
           </div>
         </div>
       )}

@@ -13,12 +13,13 @@ type TaskType = {
 export default function Tasks() {
   const [tasks, setTasks] = useState<TaskType[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search,setSearch] = useState("")
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
         const result = await getAllTasksService(search);
+        console.log(setSearch);
         setTasks(result || []);
       } catch (error) {
         console.error('Failed to fetch tasks', error);

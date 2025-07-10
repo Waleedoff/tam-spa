@@ -32,7 +32,7 @@ export function AppRouting() {
       fallback={<div className="text-primary-200 pt-10">Loading...</div>}
     >
       <Routes>
-      <Route
+        <Route
           key="registerPage"
           path={appRoutesObj.getRegisterPath()}
           element={withSuspense(<RegisterPage />)}
@@ -54,8 +54,6 @@ export function AppRouting() {
           path={appRoutesObj.getLoginPath()}
           element={withSuspense(<LoginPage />)}
         />
-
-       
 
         <Route
           key="tasksPage"

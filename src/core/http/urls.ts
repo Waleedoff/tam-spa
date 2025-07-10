@@ -23,6 +23,5 @@ export const urls: URLs = {
     createTask: `${TamURL}/task`,
     updateTask: `${TamURL}/task`,
     updateStatusTask: (task_id: string) => `${TamURL}/task/${task_id}/status`,
-
   },
 };

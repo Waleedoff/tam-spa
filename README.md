@@ -18,14 +18,12 @@ git clone https://github.com/Waleedoff/tam-spa
 cd tam-spa
 
 ```
+
 ## Install Dependencies
 
 ```bash
 npm install
 ```
-
-
-
 
 ```bash
 npm run
