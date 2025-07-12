@@ -13,9 +13,11 @@ export default function TaskProgressChart({ stats }: Props) {
   ];
 
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-md min-w-[320px] w-full transition hover:shadow-lg">
-      <h3 className="mb-4 text-lg font-semibold text-gray-800">Task Status Distribution</h3>
-      <div className="w-full h-[250px]">
+    <div className="w-full min-w-[320px] rounded-2xl bg-white p-6 shadow-md transition hover:shadow-lg">
+      <h3 className="mb-4 text-lg font-semibold text-gray-800">
+        Task Status Distribution
+      </h3>
+      <div className="h-[250px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie

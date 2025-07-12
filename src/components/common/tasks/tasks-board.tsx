@@ -114,10 +114,10 @@ export default function TaskBoard() {
   }
 
   return (
-    <div className="min-h-screen space-y-6 space-x-5 bg-gray-50 px-4 py-10 md:pl-64 ">
+    <div className="min-h-screen space-x-5 space-y-6 bg-gray-50 px-4 py-10 md:pl-64">
       {/* Header */}
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between ">
-        <h2 className="font-sans text-2xl  text-tamPurple-tam">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <h2 className="font-sans text-2xl text-tamPurple-tam">
           {showSearch ? (
             <input
               type="text"
@@ -133,23 +133,21 @@ export default function TaskBoard() {
           ) : (
             <button
               onClick={() => setShowSearch(true)}
-              className="text-tamPurple-tam hover:text-tamPurple-tam/80 ml-0 sm:ml-4"
+              className="ml-0 text-tamPurple-tam hover:text-tamPurple-tam/80 sm:ml-4"
               title="Search tasks"
             >
-             <Search className="h-5 w-5 absolute right-4 top-4 sm:static sm:ml-2" />
-
+              <Search className="absolute right-4 top-4 h-5 w-5 sm:static sm:ml-2" />
             </button>
           )}
         </h2>
 
-        <div className="text-tamPurple-tam hover:text-tamPurple-tam/80 ml-0 sm:ml-4"
-        >
-       <Button
-  className="bg-tamPurple-tam w-auto text-sm py-1 px-3 sm:static sm:ml-4 absolute left-4 top-4"
-  onClick={() => setShowModal(true)}
->
-  + New Task
-</Button>
+        <div className="ml-0 text-tamPurple-tam hover:text-tamPurple-tam/80 sm:ml-4">
+          <Button
+            className="absolute left-4 top-4 w-auto bg-tamPurple-tam px-3 py-1 text-sm sm:static sm:ml-4"
+            onClick={() => setShowModal(true)}
+          >
+            + New Task
+          </Button>
         </div>
       </div>
 
@@ -172,63 +170,73 @@ export default function TaskBoard() {
 
       {/* Task Columns */}
       <DragDropContext onDragEnd={onDragEnd}>
-  <div className="flex snap-x snap-mandatory overflow-x-auto gap-6 md:grid md:grid-cols-3 md:overflow-visible md:snap-none">
-    {columns.map((col) => {
-      const filteredTasks = tasks.filter(
-        (t: any) =>
-          t.status === col.status &&
-          t.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+        <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto md:grid md:snap-none md:grid-cols-3 md:overflow-visible">
+          {columns.map((col) => {
+            const filteredTasks = tasks.filter(
+              (t: any) =>
+                t.status === col.status &&
+                t.title.toLowerCase().includes(searchQuery.toLowerCase()),
+            );
 
-      return (
-        <div key={col.status} className="snap-start w-full shrink-0 md:w-auto md:snap-none">
-          <h3 className={`mb-4 border-b-2 pb-1 text-lg font-semibold ${col.color}`}>
-            {col.title}
-          </h3>
-
-          <Droppable droppableId={col.status}>
-            {(provided) => (
+            return (
               <div
-                className="min-h-[200px] space-y-4"
-                ref={provided.innerRef}
-                {...provided.droppableProps}
+                key={col.status}
+                className="w-full shrink-0 snap-start md:w-auto md:snap-none"
               >
-                {filteredTasks.map((task: any, index: number) => (
-                  <Draggable key={task.id} draggableId={task.id} index={index}>
-                    {(provided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <TaskCard
-                          onDelete={handleDelete}
-                          onEdit={() => {
-                            setId(task.id);
-                            setShowModalEdit(true);
-                          }}
-                          data={task}
-                          status={task.status}
-                          commentsCount={task.commentsCount}
-                          people={task.people}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-                {filteredTasks.length === 0 && (
-                  <div className="text-sm italic text-gray-400">No tasks</div>
-                )}
-              </div>
-            )}
-          </Droppable>
-        </div>
-      );
-    })}
-  </div>
-</DragDropContext>
+                <h3
+                  className={`mb-4 border-b-2 pb-1 text-lg font-semibold ${col.color}`}
+                >
+                  {col.title}
+                </h3>
 
+                <Droppable droppableId={col.status}>
+                  {(provided) => (
+                    <div
+                      className="min-h-[200px] space-y-4"
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                    >
+                      {filteredTasks.map((task: any, index: number) => (
+                        <Draggable
+                          key={task.id}
+                          draggableId={task.id}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <TaskCard
+                                onDelete={handleDelete}
+                                onEdit={() => {
+                                  setId(task.id);
+                                  setShowModalEdit(true);
+                                }}
+                                data={task}
+                                status={task.status}
+                                commentsCount={task.commentsCount}
+                                people={task.people}
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                      {filteredTasks.length === 0 && (
+                        <div className="text-sm italic text-gray-400">
+                          No tasks
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </Droppable>
+              </div>
+            );
+          })}
+        </div>
+      </DragDropContext>
 
       {showModalEdit && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">

@@ -20,7 +20,7 @@ export default function Tasks() {
     const fetchTasks = async () => {
       try {
         const result = await getAllTasksService(search);
-        toast.success("Task created successfully!");
+        toast.success('Task created successfully!');
         console.log(setSearch);
         setTasks(result || []);
       } catch (error) {

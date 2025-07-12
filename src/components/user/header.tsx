@@ -30,7 +30,7 @@ export default function Sidebar() {
     <>
       {/* Mobile Toggle Button */}
       <button
-        className="fixed top-4 left-4 z-50 flex items-center justify-center rounded-md bg-tamPurple-tam p-2 text-white shadow-md md:hidden"
+        className="fixed left-4 top-4 z-50 flex items-center justify-center rounded-md bg-tamPurple-tam p-2 text-white shadow-md md:hidden"
         onClick={() => setIsOpen(true)}
       >
         <svg
@@ -51,12 +51,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`
-          fixed left-0 top-0 z-40 flex h-full w-64 flex-col justify-between border-r border-white/10
-          bg-tamPurple-tam text-white shadow-xl transition-transform duration-300 ease-in-out
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-          md:translate-x-0 md:flex
-        `}
+        className={`fixed left-0 top-0 z-40 flex h-full w-64 flex-col justify-between border-r border-white/10 bg-tamPurple-tam text-white shadow-xl transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:flex md:translate-x-0`}
       >
         {/* Close button (mobile only) */}
         <button
@@ -129,7 +124,8 @@ export default function Sidebar() {
             </>
           ) : (
             <p className="text-sm text-white">
-              Welcome, <span className="font-semibold">{tokenData?.sub ?? 'User'}</span>
+              Welcome,{' '}
+              <span className="font-semibold">{tokenData?.sub ?? 'User'}</span>
             </p>
           )}
         </div>

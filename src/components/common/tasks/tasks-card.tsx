@@ -26,16 +26,7 @@ export function TaskCard({
     priorityColors[data.priority.toUpperCase()] || 'bg-gray-300';
 
   return (
-    <div
-      className="
-        group relative w-full sm:w-60 
-        rounded-xl bg-white p-4
-        shadow-xl shadow-indigo-100
-        transition-transform duration-300 ease-in-out 
-        hover:rotate-0 hover:scale-105 hover:shadow-2xl
-        rotate-[-0.4deg]
-      "
-    >
+    <div className="group relative w-full rotate-[-0.4deg] rounded-xl bg-white p-4 shadow-xl shadow-indigo-100 transition-transform duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-2xl sm:w-60">
       {/* Top-right action buttons */}
       <div className="absolute right-2 top-2 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
         <button
@@ -55,12 +46,10 @@ export function TaskCard({
       </div>
 
       {/* Card content */}
-      <h4 className="mb-1 text-sm font-semibold text-gray-900">
-        {data.title}
-      </h4>
+      <h4 className="mb-1 text-sm font-semibold text-gray-900">{data.title}</h4>
 
       {data.desription && (
-        <p className="mb-2 text-sm text-gray-600 leading-relaxed">
+        <p className="mb-2 text-sm leading-relaxed text-gray-600">
           {data.desription}
         </p>
       )}
@@ -73,9 +62,7 @@ export function TaskCard({
         </span>
 
         {commentsCount !== undefined && (
-          <span className="flex items-center gap-1">
-            💬 {commentsCount}
-          </span>
+          <span className="flex items-center gap-1">💬 {commentsCount}</span>
         )}
       </div>
     </div>

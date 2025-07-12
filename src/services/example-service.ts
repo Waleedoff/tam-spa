@@ -22,7 +22,6 @@ export const postLoginService = async (data: UserLoginType) => {
   }).then((res) => {
     const token = res['access_token'];
     localStorage.setItem('token', token);
-    
   });
 };
 
@@ -77,7 +76,6 @@ export const putUpdateStatusTaskService = async (
     params: { status },
   });
 };
-
 
 export const getStatisticsService = async () => {
   return makeRequest({

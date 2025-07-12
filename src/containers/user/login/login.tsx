@@ -13,13 +13,13 @@ export default function Login() {
   const handleSubmit = async (data: UserLoginType) => {
     try {
       await postLoginService(data);
-      console.log(toast.success("Logged in successfully!"))
-      toast.success("Logged in successfully!");
+      console.log(toast.success('Logged in successfully!'));
+      toast.success('Logged in successfully!');
       navigate(appRoutesObj.getHomePath());
       window.location.reload();
     } catch (error) {
       console.error(error);
-      toast.error("Login failed. Please check your credentials.");
+      toast.error('Login failed. Please check your credentials.');
     }
   };
 

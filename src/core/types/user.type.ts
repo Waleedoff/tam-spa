@@ -36,7 +36,6 @@ export type ParsedTokenType = {
   sub: string;
 };
 
-
 export type RecentTask = {
   task: string;
   status: string;

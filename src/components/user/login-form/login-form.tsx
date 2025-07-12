@@ -22,9 +22,9 @@ export default function LoginForm({ onSubmit }: UserLoginProps) {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 to-white px-4 md:pl-64">
       <form
         onSubmit={formik.handleSubmit}
-        className="w-full max-w-lg space-y-8 rounded-3xl border border-gray-100 bg-white p-8 sm:p-10 shadow-2xl"
+        className="w-full max-w-lg space-y-8 rounded-3xl border border-gray-100 bg-white p-8 shadow-2xl sm:p-10"
       >
-        <h2 className="text-center text-2xl sm:text-3xl font-bold text-tamPurple-tam">
+        <h2 className="text-center text-2xl font-bold text-tamPurple-tam sm:text-3xl">
           Welcome Back
         </h2>
         <p className="text-center text-sm text-gray-500">
@@ -63,7 +63,7 @@ export default function LoginForm({ onSubmit }: UserLoginProps) {
         <Button
           disabled={!formik.isValid || !formik.dirty}
           type="submit"
-          className="w-full rounded-xl bg-tamPurple-tam py-3 text-white transition-all duration-200 hover:bg-tamPurple-dark disabled:opacity-50"
+          className="hover:bg-tamPurple-dark w-full rounded-xl bg-tamPurple-tam py-3 text-white transition-all duration-200 disabled:opacity-50"
         >
           Login
         </Button>

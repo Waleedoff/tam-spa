@@ -10,7 +10,7 @@ type URLs = {
     createTask: string;
     updateTask: string;
     updateStatusTask: (task_id: string) => string;
-    getStatistics: string
+    getStatistics: string;
   };
 };
 

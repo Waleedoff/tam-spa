@@ -31,9 +31,9 @@ export default function TaskCreateForm({
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="space-y-4 p-4 sm:p-6 w-full"
+      className="w-full space-y-4 p-4 sm:p-6"
     >
-      <h2 className="text-lg sm:text-xl font-semibold text-tamPurple-tam">
+      <h2 className="text-lg font-semibold text-tamPurple-tam sm:text-xl">
         {title}
       </h2>
 
@@ -85,17 +85,17 @@ export default function TaskCreateForm({
         )}
       </div>
 
-      <div className="flex flex-col-reverse sm:flex-row justify-end gap-2">
+      <div className="flex flex-col-reverse justify-end gap-2 sm:flex-row">
         <Button
           type="button"
           onClick={onClose}
-          className="bg-gray-200 text-black w-full sm:w-auto"
+          className="w-full bg-gray-200 text-black sm:w-auto"
         >
           Cancel
         </Button>
         <Button
           type="submit"
-          className="bg-tamPurple-tam text-white w-full sm:w-auto"
+          className="w-full bg-tamPurple-tam text-white sm:w-auto"
         >
           Create
         </Button>

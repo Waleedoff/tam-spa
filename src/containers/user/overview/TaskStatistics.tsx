@@ -31,20 +31,19 @@ export default function TaskStatisticsContainer() {
   if (error || !data) return <p>{error || 'لا توجد بيانات'}</p>;
 
   return (
-    <div className="space-y-6 px-4 sm:px-6 md:px-8 py-6">
-    <TaskStatsCards stats={data} />
-  
-    <div className="flex flex-col md:grid md:grid-cols-2 gap-4 overflow-x-auto scrollbar-hide">
-      <div className="min-w-[320px]">
-        <TaskProgressChart stats={data} />
+    <div className="space-y-6 px-4 py-6 sm:px-6 md:px-8">
+      <TaskStatsCards stats={data} />
+
+      <div className="scrollbar-hide flex flex-col gap-4 overflow-x-auto md:grid md:grid-cols-2">
+        <div className="min-w-[320px]">
+          <TaskProgressChart stats={data} />
+        </div>
+        <div className="min-w-[320px]">
+          <WeeklyActivityChart />
+        </div>
       </div>
-      <div className="min-w-[320px]">
-        <WeeklyActivityChart />
-      </div>
+
+      <RecentTasksList recentTasks={data.recent_tasks} />
     </div>
-  
-    <RecentTasksList recentTasks={data.recent_tasks} />
-  </div>
-  
   );
 }
