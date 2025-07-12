@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { UserRegiterType } from 'src/core/types/user.type';
-import { postRegisterService } from 'src/services/example-service';
+import { postRegisterService } from 'src/services/https-service';
 import RegisterForm from 'src/components/user/register-form/register-form';
 import { appRoutesObj } from 'src/app.paths';
 

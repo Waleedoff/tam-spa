@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { TaskCard } from './tasks-card';
-import { Button } from '../Button';
+import { TaskCard } from '../tasks-card';
 import { Search } from 'lucide-react';
 import {
   deleteTaskService,
@@ -9,10 +8,11 @@ import {
   postCreateTaskService,
   putUpdateStatusTaskService,
   putUpdateTaskService,
-} from 'src/services/example-service';
+} from 'src/services/https-service';
 import { TaskCreateType } from 'src/core/types/user.type';
-import { taskCreateInitialValues } from './task-create-form.data';
-import TaskCreateForm from './TaskForm';
+import TaskCreateForm from '../TaskForm';
+import { Button } from '../../common/ui/Button';
+import { taskCreateInitialValues } from '../task-create-form.data';
 
 export default function TaskBoard() {
   const [showModal, setShowModal] = useState(false);
@@ -217,7 +217,6 @@ export default function TaskBoard() {
                                 data={task}
                                 status={task.status}
                                 commentsCount={task.commentsCount}
-                                people={task.people}
                               />
                             </div>
                           )}
