@@ -5,7 +5,6 @@ interface TaskCardProps {
   data: TaskCreateType;
   status: string;
   commentsCount?: number;
-  people?: string[];
   onEdit?: (id: string) => void;
   onDelete?: (id: string) => void;
 }
@@ -59,6 +58,7 @@ export function TaskCard({
         <span className="flex items-center gap-1 capitalize">
           <span className={`h-2 w-2 rounded-full ${priorityColor}`} />
           {data.priority.toLowerCase()} priority
+          
         </span>
 
         {commentsCount !== undefined && (

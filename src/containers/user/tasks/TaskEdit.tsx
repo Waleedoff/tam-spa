@@ -1,5 +1,5 @@
 import { TaskCreateType } from 'src/core/types/user.type';
-import TaskForm from 'src/components/common/tasks/TaskForm'; // أو أي form مشابه
+import TaskForm from 'src/components/tasks/TaskForm'; // أو أي form مشابه
 
 interface TaskEditProps {
   task: TaskCreateType;

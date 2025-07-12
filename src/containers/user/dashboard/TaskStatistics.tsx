@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import RecentTasksList from 'src/components/user/dashboard/RecentTasksList';
-import TaskProgressChart from 'src/components/user/dashboard/TaskProgressChart';
-import TaskStatsCards from 'src/components/user/dashboard/TaskStatsCards';
-import WeeklyActivityChart from 'src/components/user/dashboard/WeeklyActivityChart';
+import RecentTasksList from 'src/components/dashboard/RecentTasksList';
+import TaskProgressChart from 'src/components/dashboard/TaskProgressChart';
+import TaskStatsCards from 'src/components/dashboard/TaskStatsCards';
+import WeeklyActivityChart from 'src/components/dashboard/WeeklyActivityChart';
 import { TaskStatistics } from 'src/core/types/user.type';
-import { getStatisticsService } from 'src/services/example-service';
+import { getStatisticsService } from 'src/services/https-service';
 
 export default function TaskStatisticsContainer() {
   const [data, setData] = useState<TaskStatistics | null>(null);

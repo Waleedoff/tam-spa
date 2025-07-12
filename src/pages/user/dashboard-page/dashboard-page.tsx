@@ -1,5 +1,5 @@
-import OverviewBanner from 'src/components/user/dashboard/OverviewBanner';
-import TaskStatisticsContainer from 'src/containers/user/overview/TaskStatistics';
+import OverviewBanner from 'src/components/dashboard/OverviewBanner';
+import TaskStatisticsContainer from 'src/containers/user/dashboard/TaskStatistics';
 
 export default function HomePage() {
   return (

@@ -1,5 +1,5 @@
-import { taskCreateInitialValues } from 'src/components/common/tasks/task-create-form.data';
-import TaskCreateForm from 'src/components/common/tasks/TaskForm';
+import { taskCreateInitialValues } from 'src/components/tasks/task-create-form.data';
+import TaskCreateForm from 'src/components/tasks/TaskForm';
 import { TaskCreateType } from 'src/core/types/user.type';
 
 interface TaskCreateProps {

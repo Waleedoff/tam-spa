@@ -5,9 +5,9 @@ import { Home, CheckSquare, Target } from 'lucide-react';
 
 import { appRoutesObj } from 'src/app.paths';
 import { SizesEnum, VariantsEnum } from 'src/core/enums/tam.enums';
-import { Button } from '../common/Button';
 import { useUserDataStore } from 'src/core/stores/userData.store';
 import { ParsedTokenType } from 'src/core/types/user.type';
+import { Button } from '../common/ui/Button';
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);

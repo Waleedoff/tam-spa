@@ -4,5 +4,5 @@ export const taskCreateInitialValues: TaskCreateType = {
   id: '',
   title: '',
   desription: '',
-  priority: 'LOW',
+  priority: 'MEDIUM',
 };

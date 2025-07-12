@@ -1,4 +1,4 @@
-import TaskBoard from 'src/components/common/tasks/tasks-board';
+import TaskBoard from 'src/components/tasks/task-board/tasks-board';
 
 export default function Tasks() {
   return <TaskBoard />;

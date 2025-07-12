@@ -1,7 +1,7 @@
 // src/pages/Login.tsx
 import LoginForm from 'src/components/user/login-form/login-form';
 import { UserLoginType } from 'src/core/types/user.type';
-import { postLoginService } from 'src/services/example-service';
+import { postLoginService } from 'src/services/https-service';
 import { useNavigate } from 'react-router-dom';
 import { appRoutesObj } from 'src/app.paths';
 import { toast, ToastContainer } from 'react-toastify';
