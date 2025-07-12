@@ -1,21 +1,14 @@
+
 import OverviewBanner from 'src/components/user/dashboard/OverviewBanner';
-import RecentTasksList from 'src/components/user/dashboard/RecentTasksList';
-import TaskProgressChart from 'src/components/user/dashboard/TaskProgressChart';
-import TaskStatsCards from 'src/components/user/dashboard/TaskStatsCards';
-import WeeklyActivityChart from 'src/components/user/dashboard/WeeklyActivityChart';
+import TaskStatisticsContainer from 'src/containers/user/overview/TaskStatistics';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen space-x-10 bg-gray-50 p-6 pl-64">
+    <div className="min-h-screen bg-gray-50 px-4 pt-6 md:px-6 lg:pl-64 space-y-6">
+
       <OverviewBanner />
-      <TaskStatsCards />
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
-        <TaskProgressChart />
-        <WeeklyActivityChart />
-      </div>
-      <div className="mt-8">
-        <RecentTasksList />
-      </div>
+     <TaskStatisticsContainer />;
+      
     </div>
   );
 }

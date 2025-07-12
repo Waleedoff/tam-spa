@@ -29,8 +29,13 @@ export default function TaskCreateForm({
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="space-y-4 p-6">
-      <h2 className="text-xl font-semibold text-tamPurple-tam">{title}</h2>
+    <form
+      onSubmit={formik.handleSubmit}
+      className="space-y-4 p-4 sm:p-6 w-full"
+    >
+      <h2 className="text-lg sm:text-xl font-semibold text-tamPurple-tam">
+        {title}
+      </h2>
 
       <InputField
         name="title"
@@ -55,6 +60,7 @@ export default function TaskCreateForm({
         }
         error={formik.touched.desription ? formik.errors.desription : ''}
       />
+
       <div>
         <label htmlFor="priority" className="mb-1 block font-medium">
           Priority
@@ -79,15 +85,18 @@ export default function TaskCreateForm({
         )}
       </div>
 
-      <div className="flex justify-end gap-2">
+      <div className="flex flex-col-reverse sm:flex-row justify-end gap-2">
         <Button
           type="button"
           onClick={onClose}
-          className="bg-gray-200 text-black"
+          className="bg-gray-200 text-black w-full sm:w-auto"
         >
           Cancel
         </Button>
-        <Button type="submit" className="bg-tamPurple-tam text-white">
+        <Button
+          type="submit"
+          className="bg-tamPurple-tam text-white w-full sm:w-auto"
+        >
           Create
         </Button>
       </div>

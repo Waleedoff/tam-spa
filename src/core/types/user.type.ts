@@ -35,3 +35,16 @@ export type UserRegiterType = {
 export type ParsedTokenType = {
   sub: string;
 };
+
+
+export type RecentTask = {
+  task: string;
+  status: string;
+};
+
+export type TaskStatistics = {
+  pending_count: number;
+  in_progress: number;
+  completed: number;
+  recent_tasks: RecentTask[];
+};

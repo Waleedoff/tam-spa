@@ -13,7 +13,6 @@ import {
 import { TaskCreateType } from 'src/core/types/user.type';
 import { taskCreateInitialValues } from './task-create-form.data';
 import TaskCreateForm from './TaskForm';
-// import TaskEdit from "src/containers/user/tasks/TaskEdit";
 
 export default function TaskBoard() {
   const [showModal, setShowModal] = useState(false);
@@ -23,8 +22,6 @@ export default function TaskBoard() {
   const [tasks, setTasks] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [id, setId] = useState('');
-
-  //   const [editingTask, setEditingTask] = useState<TaskType | null>(null);
 
   const columns = [
     {
@@ -64,7 +61,6 @@ export default function TaskBoard() {
     }
   };
 
-  // This is what updates the task's status when dragged between columns
   const handleStatusChange = (taskId: string, newStatus: string) => {
     setTasks((prev: any) =>
       prev.map((task: any) =>
@@ -72,9 +68,6 @@ export default function TaskBoard() {
       ),
     );
     handleUpdateStatusTask(taskId, newStatus);
-
-    // Optionally: Send updated status to your backend here
-    // await updateTaskStatus(taskId, newStatus);
   };
 
   const onDragEnd = (result: any) => {
@@ -88,10 +81,7 @@ export default function TaskBoard() {
 
     try {
       await deleteTaskService(id);
-      console.log('Task deleted:', id);
       fetchTasks();
-      fetchTasks();
-      // Optionally: refresh tasks or update local state
     } catch (err) {
       console.error('Error deleting task:', err);
     }
@@ -100,7 +90,6 @@ export default function TaskBoard() {
   const handleSubmit = async (data: TaskCreateType) => {
     try {
       await postCreateTaskService(data);
-      console.log(data);
       fetchTasks();
     } catch (error) {
       console.error('Failed to create task:', error);
@@ -123,14 +112,12 @@ export default function TaskBoard() {
   if (loading) {
     return <div>Loading ... </div>;
   }
-  //   const handleEdit = (task: TaskType) => {
-  //     setEditingTask(task);
-  //   };
+
   return (
-    <div className="min-h-screen space-x-8 bg-gray-50 px-6 py-10 pl-64">
+    <div className="min-h-screen space-y-6 space-x-5 bg-gray-50 px-4 py-10 md:pl-64 ">
       {/* Header */}
-      <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
-        <h2 className="ml-6 font-sans text-3xl font-bold text-tamPurple-tam">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between ">
+        <h2 className="font-sans text-2xl  text-tamPurple-tam">
           {showSearch ? (
             <input
               type="text"
@@ -141,28 +128,28 @@ export default function TaskBoard() {
                 if (!searchQuery) setShowSearch(false);
               }}
               autoFocus
-              className="w-64 rounded border px-3 py-2 transition-all"
+              className="w-full max-w-xs rounded border px-3 py-2 transition-all"
             />
           ) : (
             <button
               onClick={() => setShowSearch(true)}
-              className="text-tamPurple-tam hover:text-tamPurple-tam/80"
+              className="text-tamPurple-tam hover:text-tamPurple-tam/80 ml-0 sm:ml-4"
               title="Search tasks"
             >
-              <Search className="h-5 w-5" />
+             <Search className="h-5 w-5 absolute right-4 top-4 sm:static sm:ml-2" />
+
             </button>
           )}
         </h2>
 
-        <div className="flex w-full items-center justify-between gap-3 md:w-auto">
-          <div className="flex items-center gap-2"></div>
-
-          <Button
-            className="bg-tamPurple-tam"
-            onClick={() => setShowModal(true)}
-          >
-            + New Task
-          </Button>
+        <div className="text-tamPurple-tam hover:text-tamPurple-tam/80 ml-0 sm:ml-4"
+        >
+       <Button
+  className="bg-tamPurple-tam w-auto text-sm py-1 px-3 sm:static sm:ml-4 absolute left-4 top-4"
+  onClick={() => setShowModal(true)}
+>
+  + New Task
+</Button>
         </div>
       </div>
 
@@ -185,70 +172,64 @@ export default function TaskBoard() {
 
       {/* Task Columns */}
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {columns.map((col) => {
-            const filteredTasks = tasks.filter(
-              (t: any) =>
-                t.status === col.status &&
-                t.title.toLowerCase().includes(searchQuery.toLowerCase()),
-            );
+  <div className="flex snap-x snap-mandatory overflow-x-auto gap-6 md:grid md:grid-cols-3 md:overflow-visible md:snap-none">
+    {columns.map((col) => {
+      const filteredTasks = tasks.filter(
+        (t: any) =>
+          t.status === col.status &&
+          t.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
 
-            return (
-              <div key={col.status}>
-                <h3
-                  className={`mb-4 border-b-2 pb-1 text-lg font-semibold ${col.color}`}
-                >
-                  {col.title}
-                </h3>
+      return (
+        <div key={col.status} className="snap-start w-full shrink-0 md:w-auto md:snap-none">
+          <h3 className={`mb-4 border-b-2 pb-1 text-lg font-semibold ${col.color}`}>
+            {col.title}
+          </h3>
 
-                <Droppable droppableId={col.status}>
-                  {(provided) => (
-                    <div
-                      className="min-h-[200px] space-y-4"
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                    >
-                      {filteredTasks.map((task: any, index: any) => (
-                        <Draggable
-                          key={task.id}
-                          draggableId={task.id}
-                          index={index}
-                        >
-                          {(provided) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <TaskCard
-                                onDelete={handleDelete}
-                                onEdit={() => {
-                                  setId(task.id);
-                                  setShowModalEdit(true);
-                                }}
-                                data={task}
-                                status={task.status}
-                                commentsCount={task.commentsCount}
-                                people={task.people}
-                              />
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                      {filteredTasks.length === 0 && (
-                        <div className="text-sm italic text-gray-400">
-                          No tasks
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </Droppable>
+          <Droppable droppableId={col.status}>
+            {(provided) => (
+              <div
+                className="min-h-[200px] space-y-4"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {filteredTasks.map((task: any, index: number) => (
+                  <Draggable key={task.id} draggableId={task.id} index={index}>
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <TaskCard
+                          onDelete={handleDelete}
+                          onEdit={() => {
+                            setId(task.id);
+                            setShowModalEdit(true);
+                          }}
+                          data={task}
+                          status={task.status}
+                          commentsCount={task.commentsCount}
+                          people={task.people}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+                {filteredTasks.length === 0 && (
+                  <div className="text-sm italic text-gray-400">No tasks</div>
+                )}
               </div>
-            );
-          })}
+            )}
+          </Droppable>
         </div>
-      </DragDropContext>
+      );
+    })}
+  </div>
+</DragDropContext>
+
+
       {showModalEdit && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
           <div className="w-full max-w-md rounded-xl bg-white shadow-lg">

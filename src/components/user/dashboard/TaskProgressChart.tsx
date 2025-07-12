@@ -1,23 +1,39 @@
-import { PieChart, Pie, Cell, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Legend, ResponsiveContainer } from 'recharts';
+import { TaskStatistics } from 'src/core/types/user.type';
 
-const data = [
-  { name: 'Completed', value: 9, color: '#34d399' },
-  { name: 'In Progress', value: 5, color: '#60a5fa' },
-  { name: 'Pending', value: 4, color: '#facc15' },
-];
+type Props = {
+  stats: TaskStatistics;
+};
 
-export default function TaskProgressChart() {
+export default function TaskProgressChart({ stats }: Props) {
+  const chartData = [
+    { name: 'Completed', value: stats.completed, color: '#34d399' },
+    { name: 'In Progress', value: stats.in_progress, color: '#60a5fa' },
+    { name: 'Pending', value: stats.pending_count, color: '#facc15' },
+  ];
+
   return (
-    <div className="rounded-xl bg-white p-6 shadow">
-      <h3 className="mb-4 text-lg font-semibold">Task Status Distribution</h3>
-      <PieChart width={300} height={250}>
-        <Pie data={data} dataKey="value" cx="50%" cy="50%" outerRadius={80}>
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} />
-          ))}
-        </Pie>
-        <Legend />
-      </PieChart>
+    <div className="rounded-2xl bg-white p-6 shadow-md min-w-[320px] w-full transition hover:shadow-lg">
+      <h3 className="mb-4 text-lg font-semibold text-gray-800">Task Status Distribution</h3>
+      <div className="w-full h-[250px]">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={chartData}
+              dataKey="value"
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+              label={({ name }) => name}
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Pie>
+            <Legend verticalAlign="bottom" height={36} />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }

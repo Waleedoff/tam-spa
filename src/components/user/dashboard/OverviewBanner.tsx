@@ -15,7 +15,7 @@ export default function OverviewBanner() {
   const tokenData = decodeToken(storagetoken);
 
   return (
-    <div className="space-l-10 ml-6 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 p-6 text-white shadow-md">
+    <div className="hidden md:block ml-6 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 p-6 text-white shadow-md">
       <h2 className="text-2xl font-semibold">
         Welcome back,{' '}
         <span className="font-semibold">{tokenData?.sub ?? 'User'}</span> 👋
