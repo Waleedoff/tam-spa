@@ -41,7 +41,9 @@ class AppRoutes {
   getMyTasksPath(): string {
     return '/tasks';
   }
-
+  getMembersPath(): string {
+    return '/members';
+  }
   getExamplePagePath(): string {
     return `/address/:addressId/view`;
   }

@@ -11,6 +11,7 @@ type URLs = {
     updateTask: string;
     updateStatusTask: (task_id: string) => string;
     getStatistics: string;
+    getAllMembers: string;
   };
 };
 
@@ -25,5 +26,6 @@ export const urls: URLs = {
     updateTask: `${TamURL}/task`,
     updateStatusTask: (task_id: string) => `${TamURL}/task/${task_id}/status`,
     getStatistics: `${TamURL}/task/statistics`,
+    getAllMembers: `${TamURL}/auth/members`
   },
 };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { Home, CheckSquare, Target } from 'lucide-react';
+import { Home, CheckSquare, Users } from 'lucide-react';
 
 import { appRoutesObj } from 'src/app.paths';
 import { SizesEnum, VariantsEnum } from 'src/core/enums/tam.enums';
@@ -91,11 +91,11 @@ export default function Sidebar() {
             </Link>
 
             <Link
-              to={appRoutesObj.getBasePath()}
+              to={appRoutesObj.getMembersPath()}
               className="flex items-center gap-3 rounded-lg px-4 py-2 transition duration-200 hover:bg-white hover:text-tamPurple-tam"
             >
-              <Target className="h-5 w-5" />
-              <span>Goals</span>
+              <Users className="h-5 w-5" />
+              <span>Members</span>
             </Link>
           </nav>
         </div>

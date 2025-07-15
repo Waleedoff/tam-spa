@@ -21,15 +21,19 @@ export type TaskCreateType = {
   desription: string;
   priority: string;
 };
+
 export type TaskEditType = TaskCreateType & {
   id: string;
 };
 
 export type UserRegiterType = {
+  id: string;
   full_name: string;
   username: string;
   password: string;
   email: string;
+  gender: string;
+  specialization: string;
 };
 
 export type ParsedTokenType = {

@@ -18,6 +18,16 @@ export default function RegisterForm({ onSubmit }: UserRegisterProps) {
     },
   });
 
+  // src/constants/specialization.ts
+  const specializationOptions = [
+  { label: 'Developer', value: 'DEVELOPER' },
+  { label: 'Business', value: 'BUSINESS' },
+  { label: 'HR', value: 'HR' },
+  { label: 'Finance', value: 'FINANCE' },
+  { label: 'Hunter', value: 'HUNTER' },
+];
+
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 to-white px-4 md:pl-64">
       <form
@@ -82,6 +92,58 @@ export default function RegisterForm({ onSubmit }: UserRegisterProps) {
             }
             error={formik.touched.password ? formik.errors.password : ''}
           />
+          <div>
+        <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+          Gender
+        </label>
+        <select
+          id="gender"
+          name="gender"
+          value={formik.values.gender}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className={`mt-1 block w-full rounded-md border ${
+            formik.touched.gender && formik.errors.gender
+              ? 'border-red-500'
+              : 'border-gray-300'
+          } shadow-sm focus:border-tamPurple-tam focus:ring focus:ring-tamPurple-tam/20`}
+        >
+          <option value="">Select gender</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+        </select>
+        {formik.touched.gender && formik.errors.gender && (
+          <p className="mt-1 text-sm text-red-600">{formik.errors.gender}</p>
+        )}
+      </div>
+
+<div>
+  <label htmlFor="specialization" className="block text-sm font-medium text-gray-700">
+    Specialization
+  </label>
+  <select
+    id="specialization"
+    name="specialization"
+    value={formik.values.specialization}
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+    className={`mt-1 block w-full rounded-md border ${
+      formik.touched.specialization && formik.errors.specialization
+        ? 'border-red-500'
+        : 'border-gray-300'
+    } shadow-sm focus:border-tamPurple-tam focus:ring focus:ring-tamPurple-tam/20`}
+  >
+   <option value="">Select specialization</option>
+    {specializationOptions.map((option) => (
+      <option key={option.value} value={option.value}>
+        {option.label}
+      </option>))}
+  </select>
+  {formik.touched.specialization && formik.errors.specialization && (
+    <p className="mt-1 text-sm text-red-600">{formik.errors.specialization}</p>
+  )}
+</div>
+
         </div>
 
         <Button

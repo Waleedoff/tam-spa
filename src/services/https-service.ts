@@ -83,3 +83,12 @@ export const getStatisticsService = async () => {
     method: HttpMethods.GET,
   });
 };
+
+
+export const getAllMembersService = async (q: string) => {
+  return makeRequest({
+    url: urls.task.getAllMembers,
+    method: HttpMethods.GET,
+    params: { q },
+  });
+};

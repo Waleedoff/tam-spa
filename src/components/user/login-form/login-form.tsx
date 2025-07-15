@@ -13,9 +13,10 @@ export default function LoginForm({ onSubmit }: UserLoginProps) {
   const formik = useFormik<UserLoginType>({
     initialValues: LoginFormData,
     validationSchema: loginValidationSchema,
-    onSubmit: async (values) => {
-      onSubmit(values);
-    },
+    onSubmit: async (value) => {
+      onSubmit(value);
+    }
+
   });
 
   return (

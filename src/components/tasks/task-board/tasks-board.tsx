@@ -223,11 +223,8 @@ export default function TaskBoard() {
                         </Draggable>
                       ))}
                       {provided.placeholder}
-                      {filteredTasks.length === 0 && (
-                        <div className="text-sm italic text-gray-400">
-                          No tasks
-                        </div>
-                      )}
+                      {filteredTasks.length === 0 
+                      }
                     </div>
                   )}
                 </Droppable>

@@ -14,6 +14,15 @@ const RegisterPage = React.lazy(
 );
 
 
+
+const MemberPage = React.lazy(
+  () => import('./pages/user/members/member-page'),
+);
+
+
+
+
+
 const withSuspense = (WrappedComponent: JSX.Element) => {
   return (
     <Suspense
@@ -52,6 +61,11 @@ export function AppRouting() {
           key="tasksPage"
           path={appRoutesObj.getTasksrPath()}
           element={withSuspense(<TasksPage />)}
+        />
+        <Route
+          key="memeberPage"
+          path={appRoutesObj.getMembersPath()}
+          element={withSuspense(<MemberPage />)}
         />
 
       </Routes>
