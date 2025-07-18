@@ -7,7 +7,7 @@ function App() {
     <>
       <Header />
       <main>
-        <div className="flex flex-col justify-start min-h-[80vh]">
+        <div className="flex min-h-[80vh] flex-col justify-start">
           <AppRouting />
         </div>
       </main>

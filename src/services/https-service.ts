@@ -2,6 +2,8 @@ import { makeRequest } from 'src/core/data-access/http.service';
 import { HttpMethods } from 'src/core/enums/httpMethods.enum';
 import { urls } from 'src/core/http/urls';
 import {
+  CommentCreateType,
+  CreateAnnouncemnt,
   TaskCreateType,
   UserLoginType,
   UserRegiterType,
@@ -84,11 +86,71 @@ export const getStatisticsService = async () => {
   });
 };
 
-
 export const getAllMembersService = async (q: string) => {
   return makeRequest({
     url: urls.task.getAllMembers,
     method: HttpMethods.GET,
     params: { q },
+  });
+};
+
+
+export const getTasksByUserIdService = async (userId: string) => {
+  return makeRequest({
+    url: urls.task.getTasksByUserId(userId), // call the function to get full URL
+    method: HttpMethods.GET,
+  });
+};
+
+
+export const CreateAnnouncementService = async (data: CreateAnnouncemnt) => {
+  return makeRequest({
+    url: urls.announcement.createAnnouncement,
+    method: HttpMethods.POST,
+    data,
+  })
+};
+
+export const GetAllAnnouncementService = async () => {
+  return makeRequest({
+    url: urls.announcement.getAllAnnouncement,
+    method: HttpMethods.GET,
+  })
+};
+
+export const GetDepartmentsService = async () => {
+  return makeRequest({
+    url: urls.department.getDepartments,
+    method: HttpMethods.GET,
+  })
+};
+
+
+export const voteOnAnnouncementService = async (
+  id: string,
+  vote: 'HELPFUL' | 'UNHELPFUL'
+) => {
+  return makeRequest({
+    url: `${urls.announcement.getAllAnnouncement}/${id}/vote?vote=${vote}`,
+    method: HttpMethods.POST,
+  });
+};
+
+
+export const CommentOnAnnouncementService = async (
+  data: CommentCreateType,
+  id: string,
+) => {
+  return makeRequest({
+    url: `${urls.announcement.getAllAnnouncement}/${id}/comment`,
+    method: HttpMethods.POST,
+    data,
+  });
+};
+
+export const getCommentsForAnnouncementService = async (id: string) => {
+  return makeRequest({
+    url: `${urls.announcement.getAllAnnouncement}/${id}/comments`,
+    method: HttpMethods.GET,
   });
 };

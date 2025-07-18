@@ -58,7 +58,6 @@ export function TaskCard({
         <span className="flex items-center gap-1 capitalize">
           <span className={`h-2 w-2 rounded-full ${priorityColor}`} />
           {data.priority.toLowerCase()} priority
-          
         </span>
 
         {commentsCount !== undefined && (

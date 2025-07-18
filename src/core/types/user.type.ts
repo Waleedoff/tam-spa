@@ -22,6 +22,10 @@ export type TaskCreateType = {
   priority: string;
 };
 
+export type CommentCreateType = {
+  content: string;
+}
+
 export type TaskEditType = TaskCreateType & {
   id: string;
 };
@@ -33,7 +37,8 @@ export type UserRegiterType = {
   password: string;
   email: string;
   gender: string;
-  specialization: string;
+  department: string;
+  role: string;
 };
 
 export type ParsedTokenType = {
@@ -50,4 +55,14 @@ export type TaskStatistics = {
   in_progress: number;
   completed: number;
   recent_tasks: RecentTask[];
+};
+
+
+export type CreateAnnouncemnt = {
+  title: string;
+  content: string;
+  media_url: string;
+  target_roles: string[];
+  target_departments: string[];
+  publishing_status: string;
 };

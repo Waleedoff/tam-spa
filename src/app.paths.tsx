@@ -44,6 +44,12 @@ class AppRoutes {
   getMembersPath(): string {
     return '/members';
   }
+  getAnnouncementPath(): string {
+    return '/announcement';
+  }
+  getDepartmentPath(): string {
+    return '/department';
+  }
   getExamplePagePath(): string {
     return `/address/:addressId/view`;
   }

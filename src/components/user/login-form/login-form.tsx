@@ -15,8 +15,7 @@ export default function LoginForm({ onSubmit }: UserLoginProps) {
     validationSchema: loginValidationSchema,
     onSubmit: async (value) => {
       onSubmit(value);
-    }
-
+    },
   });
 
   return (

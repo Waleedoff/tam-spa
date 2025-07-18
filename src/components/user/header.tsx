@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { Home, CheckSquare, Users } from 'lucide-react';
+import { Home, CheckSquare, Users, Megaphone, Building2 } from 'lucide-react';
 
 import { appRoutesObj } from 'src/app.paths';
 import { SizesEnum, VariantsEnum } from 'src/core/enums/tam.enums';
@@ -11,6 +11,9 @@ import { Button } from '../common/ui/Button';
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [openTasksSection, setOpenTasksSection] = useState(true);
+  const [openOrgSection, setOpenOrgSection] = useState(true);
+
   const navigate = useNavigate();
   const { isLoggedIn } = useUserDataStore();
 
@@ -40,28 +43,22 @@ export default function Sidebar() {
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 6h16M4 12h16M4 18h16"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-40 flex h-full w-64 flex-col justify-between border-r border-white/10 bg-tamPurple-tam text-white shadow-xl transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:flex md:translate-x-0`}
+        className={`fixed left-0 top-0 z-40 flex h-full w-64 flex-col justify-between border-r border-white/10 bg-tamPurple-tam text-white shadow-xl transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:flex md:translate-x-0`}
       >
         {/* Close button (mobile only) */}
-        <button
-          className="absolute right-4 top-4 text-white md:hidden"
-          onClick={() => setIsOpen(false)}
-        >
+        <button className="absolute right-4 top-4 text-white md:hidden" onClick={() => setIsOpen(false)}>
           ✕
         </button>
 
-        {/* Top Section - Logo */}
+        {/* Top Section - Logo + Navigation */}
         <div className="p-6 pt-14 md:pt-6">
           <Link to={appRoutesObj.getBasePath()}>
             <img
@@ -72,32 +69,68 @@ export default function Sidebar() {
             />
           </Link>
 
-          {/* Navigation */}
-          <nav className="space-y-2">
-            <Link
-              to={appRoutesObj.getHomePath()}
-              className="flex items-center gap-3 rounded-lg px-4 py-2 transition duration-200 hover:bg-white hover:text-tamPurple-tam"
-            >
-              <Home className="h-5 w-5" />
-              <span>Overview</span>
-            </Link>
+          {/* 🧩 Task Workspace Section */}
+          <div
+            className="flex items-center justify-between text-xs uppercase tracking-wider text-white/60 cursor-pointer mb-1"
+            onClick={() => setOpenTasksSection(prev => !prev)}
+          >
+            <span>Task Workspace</span>
+            <span>{openTasksSection ? '–' : '+'}</span>
+          </div>
 
-            <Link
-              to={appRoutesObj.getMyTasksPath()}
-              className="flex items-center gap-3 rounded-lg px-4 py-2 transition duration-200 hover:bg-white hover:text-tamPurple-tam"
-            >
-              <CheckSquare className="h-5 w-5" />
-              <span>My Tasks</span>
-            </Link>
+          {openTasksSection && (
+            <nav className="space-y-2 mb-6">
+              <Link
+                to={appRoutesObj.getHomePath()}
+                className="flex items-center gap-3 rounded-lg px-4 py-2 transition duration-200 hover:bg-white hover:text-tamPurple-tam"
+              >
+                <Home className="h-5 w-5" />
+                <span>Overview</span>
+              </Link>
+              <Link
+                to={appRoutesObj.getMyTasksPath()}
+                className="flex items-center gap-3 rounded-lg px-4 py-2 transition duration-200 hover:bg-white hover:text-tamPurple-tam"
+              >
+                <CheckSquare className="h-5 w-5" />
+                <span>My Tasks</span>
+              </Link>
+            </nav>
+          )}
 
-            <Link
-              to={appRoutesObj.getMembersPath()}
-              className="flex items-center gap-3 rounded-lg px-4 py-2 transition duration-200 hover:bg-white hover:text-tamPurple-tam"
-            >
-              <Users className="h-5 w-5" />
-              <span>Members</span>
-            </Link>
-          </nav>
+          {/* 🏢 Organization Section */}
+          <div
+            className="flex items-center justify-between text-xs uppercase tracking-wider text-white/60 cursor-pointer mb-1 mt-6"
+            onClick={() => setOpenOrgSection(prev => !prev)}
+          >
+            <span>Organization</span>
+            <span>{openOrgSection ? '–' : '+'}</span>
+          </div>
+
+          {openOrgSection && (
+            <nav className="space-y-2">
+              <Link
+                to={appRoutesObj.getAnnouncementPath()}
+                className="flex items-center gap-3 rounded-lg px-4 py-2 transition duration-200 hover:bg-white hover:text-tamPurple-tam"
+              >
+                <Users className="h-5 w-5" />
+                <span>Announcements</span>
+              </Link>
+              <Link
+                to={appRoutesObj.getMembersPath()}
+                className="flex items-center gap-3 rounded-lg px-4 py-2 transition duration-200 hover:bg-white hover:text-tamPurple-tam"
+              >
+                <Megaphone className="h-5 w-5" />
+                <span>Members</span>
+              </Link>
+              <Link
+                to={appRoutesObj.getDepartmentPath()}
+                className="flex items-center gap-3 rounded-lg px-4 py-2 transition duration-200 hover:bg-white hover:text-tamPurple-tam"
+              >
+                <Building2 className="h-5 w-5" />
+                <span>Departments</span>
+              </Link>
+            </nav>
+          )}
         </div>
 
         {/* Bottom Section - Auth Info */}
@@ -124,8 +157,7 @@ export default function Sidebar() {
             </>
           ) : (
             <p className="text-sm text-white">
-              Welcome,{' '}
-              <span className="font-semibold">{tokenData?.sub ?? 'User'}</span>
+              Welcome, <span className="font-semibold">{tokenData?.sub ?? 'User'}</span>
             </p>
           )}
         </div>

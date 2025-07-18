@@ -13,16 +13,9 @@ const RegisterPage = React.lazy(
   () => import('./pages/user/register-page/register-page'),
 );
 
-
-
-const MemberPage = React.lazy(
-  () => import('./pages/user/members/member-page'),
-);
-
-
-
-
-
+const AnnouncementPage = React.lazy(() => import ('./pages/announcement/announcement-page'))
+const MemberPage = React.lazy(() => import('./pages/user/members/member-page'));
+const DepartmentPage = React.lazy(() => import ('./pages/department/department-page'))
 const withSuspense = (WrappedComponent: JSX.Element) => {
   return (
     <Suspense
@@ -67,7 +60,16 @@ export function AppRouting() {
           path={appRoutesObj.getMembersPath()}
           element={withSuspense(<MemberPage />)}
         />
-
+        <Route
+          key="announcmentPage"
+          path={appRoutesObj.getAnnouncementPath()}
+          element={withSuspense(<AnnouncementPage />)}
+        />
+        <Route
+          key="departmentPage"
+          path={appRoutesObj.getDepartmentPath()}
+          element={withSuspense(<DepartmentPage />)}
+        />
       </Routes>
     </Suspense>
   );

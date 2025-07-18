@@ -15,6 +15,7 @@ import { Button } from '../../common/ui/Button';
 import { taskCreateInitialValues } from '../task-create-form.data';
 
 export default function TaskBoard() {
+  
   const [showModal, setShowModal] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -223,8 +224,7 @@ export default function TaskBoard() {
                         </Draggable>
                       ))}
                       {provided.placeholder}
-                      {filteredTasks.length === 0 
-                      }
+                      {filteredTasks.length === 0}
                     </div>
                   )}
                 </Droppable>
