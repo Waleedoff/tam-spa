@@ -43,7 +43,12 @@ export default function Sidebar() {
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h16"
+          />
         </svg>
       </button>
 
@@ -54,7 +59,10 @@ export default function Sidebar() {
         } md:flex md:translate-x-0`}
       >
         {/* Close button (mobile only) */}
-        <button className="absolute right-4 top-4 text-white md:hidden" onClick={() => setIsOpen(false)}>
+        <button
+          className="absolute right-4 top-4 text-white md:hidden"
+          onClick={() => setIsOpen(false)}
+        >
           ✕
         </button>
 
@@ -71,15 +79,15 @@ export default function Sidebar() {
 
           {/* 🧩 Task Workspace Section */}
           <div
-            className="flex items-center justify-between text-xs uppercase tracking-wider text-white/60 cursor-pointer mb-1"
-            onClick={() => setOpenTasksSection(prev => !prev)}
+            className="mb-1 flex cursor-pointer items-center justify-between text-xs uppercase tracking-wider text-white/60"
+            onClick={() => setOpenTasksSection((prev) => !prev)}
           >
             <span>Task Workspace</span>
             <span>{openTasksSection ? '–' : '+'}</span>
           </div>
 
           {openTasksSection && (
-            <nav className="space-y-2 mb-6">
+            <nav className="mb-6 space-y-2">
               <Link
                 to={appRoutesObj.getHomePath()}
                 className="flex items-center gap-3 rounded-lg px-4 py-2 transition duration-200 hover:bg-white hover:text-tamPurple-tam"
@@ -99,8 +107,8 @@ export default function Sidebar() {
 
           {/* 🏢 Organization Section */}
           <div
-            className="flex items-center justify-between text-xs uppercase tracking-wider text-white/60 cursor-pointer mb-1 mt-6"
-            onClick={() => setOpenOrgSection(prev => !prev)}
+            className="mb-1 mt-6 flex cursor-pointer items-center justify-between text-xs uppercase tracking-wider text-white/60"
+            onClick={() => setOpenOrgSection((prev) => !prev)}
           >
             <span>Organization</span>
             <span>{openOrgSection ? '–' : '+'}</span>
@@ -157,7 +165,8 @@ export default function Sidebar() {
             </>
           ) : (
             <p className="text-sm text-white">
-              Welcome, <span className="font-semibold">{tokenData?.sub ?? 'User'}</span>
+              Welcome,{' '}
+              <span className="font-semibold">{tokenData?.sub ?? 'User'}</span>
             </p>
           )}
         </div>

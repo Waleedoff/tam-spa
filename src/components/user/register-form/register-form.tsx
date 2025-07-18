@@ -190,9 +190,7 @@ export default function RegisterForm({ onSubmit }: UserRegisterProps) {
               ))}
             </select>
             {formik.touched.role && formik.errors.role && (
-              <p className="mt-1 text-sm text-red-600">
-                {formik.errors.role}
-              </p>
+              <p className="mt-1 text-sm text-red-600">{formik.errors.role}</p>
             )}
           </div>
         </div>

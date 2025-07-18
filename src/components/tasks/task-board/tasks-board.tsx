@@ -15,7 +15,6 @@ import { Button } from '../../common/ui/Button';
 import { taskCreateInitialValues } from '../task-create-form.data';
 
 export default function TaskBoard() {
-  
   const [showModal, setShowModal] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');

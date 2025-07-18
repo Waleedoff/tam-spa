@@ -26,13 +26,19 @@ interface CommentType {
   created: Date;
 }
 
-export default function AnnouncementList({ announcements: initial }: AnnouncementListProps) {
+export default function AnnouncementList({
+  announcements: initial,
+}: AnnouncementListProps) {
   const [announcements, setAnnouncements] = useState<Announcement[]>(initial);
-  const [voted, setVoted] = useState<Record<string, 'HELPFUL' | 'UNHELPFUL' | null>>({});
+  const [voted, setVoted] = useState<
+    Record<string, 'HELPFUL' | 'UNHELPFUL' | null>
+  >({});
   const [comments, setComments] = useState<Record<string, string>>({});
   const [replyBoxOpen, setReplyBoxOpen] = useState<Record<string, boolean>>({});
   const [openComments, setOpenComments] = useState<Record<string, boolean>>({});
-  const [announcementComments, setAnnouncementComments] = useState<Record<string, CommentType[]>>({});
+  const [announcementComments, setAnnouncementComments] = useState<
+    Record<string, CommentType[]>
+  >({});
 
   const handleToggleComments = async (id: string) => {
     setOpenComments((prev) => ({
@@ -87,12 +93,16 @@ export default function AnnouncementList({ announcements: initial }: Announcemen
               ...a,
               vote: {
                 ...a.vote,
-                helpfull: type === 'HELPFUL' ? a.vote.helpfull + 1 : a.vote.helpfull,
-                unhelpfull: type === 'UNHELPFUL' ? a.vote.unhelpfull + 1 : a.vote.unhelpfull,
+                helpfull:
+                  type === 'HELPFUL' ? a.vote.helpfull + 1 : a.vote.helpfull,
+                unhelpfull:
+                  type === 'UNHELPFUL'
+                    ? a.vote.unhelpfull + 1
+                    : a.vote.unhelpfull,
               },
             }
-          : a
-      )
+          : a,
+      ),
     );
     try {
       await voteOnAnnouncementService(id, type);
@@ -102,13 +112,13 @@ export default function AnnouncementList({ announcements: initial }: Announcemen
   };
 
   return (
-    <div className="space-y-8 p-4 max-w-4xl mx-auto">
+    <div className="mx-auto max-w-4xl space-y-8 p-4">
       {announcements.map((a) => {
         const voteStatus = voted[a.id];
         return (
           <div
             key={a.id}
-            className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md hover:shadow-lg transition"
+            className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition hover:shadow-lg"
           >
             {a.media_url && (
               <img
@@ -118,16 +128,20 @@ export default function AnnouncementList({ announcements: initial }: Announcemen
               />
             )}
 
-            <h2 className="text-xl font-semibold text-tamPurple-tam mb-2">{a.title}</h2>
-            <p className="text-gray-700 text-sm mb-4 leading-relaxed">{a.content}</p>
+            <h2 className="mb-2 text-xl font-semibold text-tamPurple-tam">
+              {a.title}
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-gray-700">
+              {a.content}
+            </p>
 
             {/* Voting Section */}
-            <div className="flex items-center gap-4 mb-4 text-sm text-gray-600">
+            <div className="mb-4 flex items-center gap-4 text-sm text-gray-600">
               {voteStatus !== 'UNHELPFUL' && (
                 <button
                   onClick={() => handleVote(a.id, 'HELPFUL')}
                   disabled={!!voteStatus}
-                  className="flex items-center gap-1 hover:text-green-600 transition"
+                  className="flex items-center gap-1 transition hover:text-green-600"
                 >
                   👍 <span>{a.vote.helpfull}</span>
                 </button>
@@ -136,7 +150,7 @@ export default function AnnouncementList({ announcements: initial }: Announcemen
                 <button
                   onClick={() => handleVote(a.id, 'UNHELPFUL')}
                   disabled={!!voteStatus}
-                  className="flex items-center gap-1 hover:text-red-600 transition"
+                  className="flex items-center gap-1 transition hover:text-red-600"
                 >
                   👎 <span>{a.vote.unhelpfull}</span>
                 </button>
@@ -151,18 +165,26 @@ export default function AnnouncementList({ announcements: initial }: Announcemen
 
             {/* Comments Section */}
             {openComments[a.id] && (
-              <div className="mt-3 space-y-3 max-h-64 overflow-y-auto bg-gray-50 p-4 rounded-lg border">
+              <div className="mt-3 max-h-64 space-y-3 overflow-y-auto rounded-lg border bg-gray-50 p-4">
                 {announcementComments[a.id]?.length ? (
                   announcementComments[a.id].map((comment, idx) => (
-                    <div key={idx} className="p-3 rounded-lg bg-white shadow-sm">
-                      <div className="text-xs text-gray-500 mb-1">
-                        {comment.username} • {new Date(comment.created).toLocaleString()}
+                    <div
+                      key={idx}
+                      className="rounded-lg bg-white p-3 shadow-sm"
+                    >
+                      <div className="mb-1 text-xs text-gray-500">
+                        {comment.username} •{' '}
+                        {new Date(comment.created).toLocaleString()}
                       </div>
-                      <div className="text-sm text-gray-700">{comment.content}</div>
+                      <div className="text-sm text-gray-700">
+                        {comment.content}
+                      </div>
                     </div>
                   ))
                 ) : (
-                  <p className="text-sm text-gray-400 italic">No comments yet.</p>
+                  <p className="text-sm italic text-gray-400">
+                    No comments yet.
+                  </p>
                 )}
               </div>
             )}
@@ -173,7 +195,7 @@ export default function AnnouncementList({ announcements: initial }: Announcemen
                 <input
                   type="text"
                   placeholder="Write a reply..."
-                  className="flex-1 rounded-full border px-4 py-2 text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-purple-400 shadow-sm"
+                  className="flex-1 rounded-full border px-4 py-2 text-sm text-gray-800 shadow-sm focus:outline-none focus:ring-1 focus:ring-purple-400"
                   value={comments[a.id] || ''}
                   onChange={(e) =>
                     setComments((prev) => ({ ...prev, [a.id]: e.target.value }))
@@ -181,15 +203,17 @@ export default function AnnouncementList({ announcements: initial }: Announcemen
                 />
                 <button
                   onClick={() => handleCommentSubmit(a.id)}
-                  className="text-sm bg-tamPurple-tam text-white px-4 py-2 rounded-full hover:bg-purple-700"
+                  className="rounded-full bg-tamPurple-tam px-4 py-2 text-sm text-white hover:bg-purple-700"
                 >
                   Send
                 </button>
               </div>
             ) : (
               <button
-                className="mt-4 text-sm text-gray-500 hover:text-purple-600 transition"
-                onClick={() => setReplyBoxOpen((prev) => ({ ...prev, [a.id]: true }))}
+                className="mt-4 text-sm text-gray-500 transition hover:text-purple-600"
+                onClick={() =>
+                  setReplyBoxOpen((prev) => ({ ...prev, [a.id]: true }))
+                }
               >
                 💬 Reply
               </button>

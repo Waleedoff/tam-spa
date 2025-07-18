@@ -59,7 +59,7 @@ export default function Users() {
       {/* Task Modal */}
       {showTasksModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30 px-4">
-          <div className="w-full max-w-3xl rounded-xl bg-white p-6 shadow-lg max-h-[80vh] overflow-y-auto">
+          <div className="max-h-[80vh] w-full max-w-3xl overflow-y-auto rounded-xl bg-white p-6 shadow-lg">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-xl font-bold text-tamPurple-tam">
                 User Tasks
@@ -103,8 +103,8 @@ export default function Users() {
                           task.priority === 'HIGH'
                             ? 'bg-red-100 text-red-600'
                             : task.priority === 'MEDIUM'
-                            ? 'bg-yellow-100 text-yellow-700'
-                            : 'bg-teal-100 text-teal-600'
+                              ? 'bg-yellow-100 text-yellow-700'
+                              : 'bg-teal-100 text-teal-600'
                         }`}
                       >
                         <span className="h-2 w-2 rounded-full bg-current" />

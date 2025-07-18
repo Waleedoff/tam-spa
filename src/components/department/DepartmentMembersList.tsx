@@ -24,7 +24,9 @@ const departmentIcons: Record<string, JSX.Element> = {
   HUNTER: <Target className="text-red-500" size={20} />,
 };
 
-export default function DepartmentMembersList({ departments }: DepartmentMembersListProps) {
+export default function DepartmentMembersList({
+  departments,
+}: DepartmentMembersListProps) {
   const [open, setOpen] = useState<string | null>(null);
 
   const toggle = (department: string) => {
@@ -32,10 +34,12 @@ export default function DepartmentMembersList({ departments }: DepartmentMembers
   };
 
   return (
-    <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 md:pl-64">
+    <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 md:pl-64 lg:grid-cols-3">
       {departments.map((dep) => {
         const isOpen = open === dep.department;
-        const Icon = departmentIcons[dep.department] ?? <Users size={20} className="text-gray-400" />;
+        const Icon = departmentIcons[dep.department] ?? (
+          <Users size={20} className="text-gray-400" />
+        );
 
         return (
           <div
@@ -51,14 +55,18 @@ export default function DepartmentMembersList({ departments }: DepartmentMembers
               <div className="flex items-center gap-3">
                 {Icon}
                 <div>
-                  <h2 className="text-lg font-bold text-tamPurple-tam">{dep.department}</h2>
+                  <h2 className="text-lg font-bold text-tamPurple-tam">
+                    {dep.department}
+                  </h2>
                   <p className="text-sm text-gray-500">
                     {dep.members.length} member{dep.members.length !== 1 && 's'}
                   </p>
                 </div>
               </div>
 
-              <div className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+              <div
+                className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+              >
                 <svg
                   className="h-5 w-5 text-gray-400"
                   xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +74,12 @@ export default function DepartmentMembersList({ departments }: DepartmentMembers
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </div>
             </button>
@@ -74,7 +87,9 @@ export default function DepartmentMembersList({ departments }: DepartmentMembers
             {isOpen && (
               <div className="border-t border-gray-100 px-6 pb-6">
                 {dep.members.length === 0 ? (
-                  <p className="pt-4 text-sm text-gray-400">No members in this department.</p>
+                  <p className="pt-4 text-sm text-gray-400">
+                    No members in this department.
+                  </p>
                 ) : (
                   <ul className="mt-4 space-y-3">
                     {dep.members.map((member, idx) => (
@@ -82,9 +97,13 @@ export default function DepartmentMembersList({ departments }: DepartmentMembers
                         key={idx}
                         className="rounded-xl border border-gray-100 bg-gray-50 p-4 text-sm shadow-sm"
                       >
-                        <p className="font-semibold text-tamPurple-tam">{member.username}</p>
+                        <p className="font-semibold text-tamPurple-tam">
+                          {member.username}
+                        </p>
                         <p className="text-gray-500">{member.email}</p>
-                        <p className="text-xs italic text-gray-400">{member.role}</p>
+                        <p className="text-xs italic text-gray-400">
+                          {member.role}
+                        </p>
                       </li>
                     ))}
                   </ul>

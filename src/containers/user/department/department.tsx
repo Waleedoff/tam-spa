@@ -5,7 +5,7 @@ import { GetDepartmentsService } from 'src/services/https-service';
 interface Member {
   username: string;
   email: string;
-  role: string
+  role: string;
 }
 
 interface Department {
@@ -34,7 +34,9 @@ export default function DepartmentMembersContainer() {
 
   return (
     <div className="pt-10">
-      <h1 className="text-center text-3xl font-bold text-tamPurple-tam mb-6">Departments & Members</h1>
+      <h1 className="mb-6 text-center text-3xl font-bold text-tamPurple-tam">
+        Departments & Members
+      </h1>
       {loading ? (
         <p className="text-center text-gray-500">Loading...</p>
       ) : (

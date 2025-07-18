@@ -8,5 +8,5 @@ export const RegisterFormData: UserRegiterType = {
   email: '',
   gender: 'MALE',
   department: 'HR',
-  role: 'MANAGER'
+  role: 'MANAGER',
 };

@@ -17,11 +17,11 @@ type URLs = {
   announcement: {
     createAnnouncement: string;
     getAllAnnouncement: string;
-  }
+  };
 
   department: {
     getDepartments: string;
-  }
+  };
 };
 
 export const urls: URLs = {
@@ -36,13 +36,13 @@ export const urls: URLs = {
     updateStatusTask: (task_id: string) => `${TamURL}/task/${task_id}/status`,
     getStatistics: `${TamURL}/task/statistics`,
     getAllMembers: `${TamURL}/auth/members`,
-    getTasksByUserId: (user_id: string) => `${TamURL}/task/${user_id}/tasks`
+    getTasksByUserId: (user_id: string) => `${TamURL}/task/${user_id}/tasks`,
   },
   announcement: {
     createAnnouncement: `${TamURL}/announcement`,
-    getAllAnnouncement: `${TamURL}/announcement`
+    getAllAnnouncement: `${TamURL}/announcement`,
   },
   department: {
     getDepartments: `${TamURL}/organization/departments`,
-  }
+  },
 };

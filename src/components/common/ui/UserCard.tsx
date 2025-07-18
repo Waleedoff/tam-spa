@@ -7,7 +7,6 @@ interface UserCardProps {
   specialization: string;
   gender: string;
   onClick?: () => void;
-
 }
 
 export function UserCard({
@@ -37,9 +36,9 @@ export function UserCard({
 
   return (
     <div
-    className="w-full rounded-xl border bg-white p-4 shadow-md hover:shadow-lg cursor-pointer transition"
-    onClick={onClick}
-  >
+      className="w-full cursor-pointer rounded-xl border bg-white p-4 shadow-md transition hover:shadow-lg"
+      onClick={onClick}
+    >
       <div className="flex items-center space-x-4">
         {/* Avatar Icon */}
         <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-100">
@@ -60,7 +59,10 @@ export function UserCard({
             {specialization.toLowerCase()}
           </span>
         </div>
-        <MdOutlineChecklist className="text-tamPurple-tam text-xl hover:text-tamPurple-dark" title="View Tasks" />
+        <MdOutlineChecklist
+          className="hover:text-tamPurple-dark text-xl text-tamPurple-tam"
+          title="View Tasks"
+        />
       </div>
     </div>
   );

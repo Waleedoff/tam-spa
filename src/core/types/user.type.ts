@@ -24,7 +24,7 @@ export type TaskCreateType = {
 
 export type CommentCreateType = {
   content: string;
-}
+};
 
 export type TaskEditType = TaskCreateType & {
   id: string;
@@ -56,7 +56,6 @@ export type TaskStatistics = {
   completed: number;
   recent_tasks: RecentTask[];
 };
-
 
 export type CreateAnnouncemnt = {
   title: string;

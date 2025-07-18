@@ -94,7 +94,6 @@ export const getAllMembersService = async (q: string) => {
   });
 };
 
-
 export const getTasksByUserIdService = async (userId: string) => {
   return makeRequest({
     url: urls.task.getTasksByUserId(userId), // call the function to get full URL
@@ -102,40 +101,37 @@ export const getTasksByUserIdService = async (userId: string) => {
   });
 };
 
-
 export const CreateAnnouncementService = async (data: CreateAnnouncemnt) => {
   return makeRequest({
     url: urls.announcement.createAnnouncement,
     method: HttpMethods.POST,
     data,
-  })
+  });
 };
 
 export const GetAllAnnouncementService = async () => {
   return makeRequest({
     url: urls.announcement.getAllAnnouncement,
     method: HttpMethods.GET,
-  })
+  });
 };
 
 export const GetDepartmentsService = async () => {
   return makeRequest({
     url: urls.department.getDepartments,
     method: HttpMethods.GET,
-  })
+  });
 };
-
 
 export const voteOnAnnouncementService = async (
   id: string,
-  vote: 'HELPFUL' | 'UNHELPFUL'
+  vote: 'HELPFUL' | 'UNHELPFUL',
 ) => {
   return makeRequest({
     url: `${urls.announcement.getAllAnnouncement}/${id}/vote?vote=${vote}`,
     method: HttpMethods.POST,
   });
 };
-
 
 export const CommentOnAnnouncementService = async (
   data: CommentCreateType,

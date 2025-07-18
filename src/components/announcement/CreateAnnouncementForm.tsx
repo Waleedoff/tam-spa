@@ -14,19 +14,15 @@ const DepartmentOptions = [
   'MARKETING',
 ];
 
-const RoleOptions = [
-  'MANAGER',
-  'EMP',
-  'TRAINER',
-  'FINAINC',
-  'HUNTER',
-];
+const RoleOptions = ['MANAGER', 'EMP', 'TRAINER', 'FINAINC', 'HUNTER'];
 
 interface AnnouncementFormProps {
   onSubmit: (values: CreateAnnouncemnt) => void;
 }
 
-export default function CreateAnnouncementForm({ onSubmit }: AnnouncementFormProps) {
+export default function CreateAnnouncementForm({
+  onSubmit,
+}: AnnouncementFormProps) {
   const formik = useFormik({
     initialValues: CreateAnnouncementFormData,
     validationSchema: CreateAnnouncementValidationSchema,
@@ -37,7 +33,7 @@ export default function CreateAnnouncementForm({ onSubmit }: AnnouncementFormPro
 
   const handleCheckboxChange = (
     fieldName: 'target_roles' | 'target_departments',
-    value: string
+    value: string,
   ) => {
     const selectedValues = formik.values[fieldName];
     const isSelected = selectedValues.includes(value);
@@ -81,14 +77,15 @@ export default function CreateAnnouncementForm({ onSubmit }: AnnouncementFormPro
             value={formik.values.content}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            isValid={formik.touched.content ? !formik.errors.content : undefined}
+            isValid={
+              formik.touched.content ? !formik.errors.content : undefined
+            }
             error={formik.touched.content ? formik.errors.content : ''}
-           
           />
 
           {/* Target Roles */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="mb-1 block text-sm font-medium text-gray-700">
               Target Roles (Optional)
             </label>
             <div className="flex flex-wrap gap-3">
@@ -107,7 +104,7 @@ export default function CreateAnnouncementForm({ onSubmit }: AnnouncementFormPro
               ))}
             </div>
             {formik.touched.target_roles && formik.errors.target_roles && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="mt-1 text-sm text-red-500">
                 {(formik.errors.target_roles as string) ?? ''}
               </p>
             )}
@@ -115,7 +112,7 @@ export default function CreateAnnouncementForm({ onSubmit }: AnnouncementFormPro
 
           {/* Target Departments */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="mb-1 block text-sm font-medium text-gray-700">
               Target Departments (Optional)
             </label>
             <div className="flex flex-wrap gap-3">
@@ -127,17 +124,20 @@ export default function CreateAnnouncementForm({ onSubmit }: AnnouncementFormPro
                   <input
                     type="checkbox"
                     checked={formik.values.target_departments.includes(dep)}
-                    onChange={() => handleCheckboxChange('target_departments', dep)}
+                    onChange={() =>
+                      handleCheckboxChange('target_departments', dep)
+                    }
                   />
                   {dep}
                 </label>
               ))}
             </div>
-            {formik.touched.target_departments && formik.errors.target_departments && (
-              <p className="text-red-500 text-sm mt-1">
-                {(formik.errors.target_departments as string) ?? ''}
-              </p>
-            )}
+            {formik.touched.target_departments &&
+              formik.errors.target_departments && (
+                <p className="mt-1 text-sm text-red-500">
+                  {(formik.errors.target_departments as string) ?? ''}
+                </p>
+              )}
           </div>
         </div>
 

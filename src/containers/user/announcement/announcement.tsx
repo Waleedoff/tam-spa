@@ -19,8 +19,6 @@ import { GetAllAnnouncementService } from 'src/services/https-service';
 //       .finally(() => setLoading(false));
 //   }, [fetchAnnouncements]);
 
-
-
 //   const handleSubmit = async (data: CreateAnnouncemnt) => {
 //     try {
 //       await CreateAnnouncementService(data);
@@ -54,7 +52,6 @@ interface Announcement {
     helpfull: number;
     unhelpfull: number;
   };
-  
 }
 
 export default function Announcement() {
@@ -85,7 +82,9 @@ export default function Announcement() {
       ) : (
         <AnnouncementList announcements={announcements} />
       )}
-      </div>
+    </div>
     // </div>
   );
+
+  
 }
