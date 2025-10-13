@@ -17,15 +17,15 @@ const RegisterPage = React.lazy(
 const AnnouncementPage = React.lazy(
   () => import('./pages/announcement/announcement-page'),
 );
-const LangChainPage = React.lazy(()=> import ('./pages/langChain/langChain-page'))
+const LangChainPage = React.lazy(
+  () => import('./pages/langChain/langChain-page'),
+);
 const MemberPage = React.lazy(() => import('./pages/user/members/member-page'));
 const DepartmentPage = React.lazy(
   () => import('./pages/department/department-page'),
 );
 
-const ProjectPage = React.lazy(
-  () => import ('./pages/room/room-page')
-)
+const ProjectPage = React.lazy(() => import('./pages/room/room-page'));
 const withSuspense = (WrappedComponent: JSX.Element) => {
   return (
     <Suspense
@@ -71,7 +71,7 @@ export function AppRouting() {
           element={withSuspense(<TasksWorkspacePage />)}
         />
 
-      <Route
+        <Route
           key="tasksWorkspacePage"
           path={appRoutesObj.getChatBotPath()}
           element={withSuspense(<LangChainPage />)}
@@ -93,10 +93,10 @@ export function AppRouting() {
           element={withSuspense(<DepartmentPage />)}
         />
         <Route
-            key="projectDetail"
-            path="/projects/:id"
-            element={withSuspense(<ProjectPage />)}
-          />
+          key="projectDetail"
+          path="/projects/:id"
+          element={withSuspense(<ProjectPage />)}
+        />
       </Routes>
     </Suspense>
   );

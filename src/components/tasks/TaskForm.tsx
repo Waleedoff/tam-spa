@@ -30,8 +30,13 @@ export default function TaskForm({
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="w-full space-y-4 p-4 sm:p-6">
-      <h2 className="text-lg font-semibold text-tamPurple-tam sm:text-xl">{title}</h2>
+    <form
+      onSubmit={formik.handleSubmit}
+      className="w-full space-y-4 p-4 sm:p-6"
+    >
+      <h2 className="text-lg font-semibold text-tamPurple-tam sm:text-xl">
+        {title}
+      </h2>
 
       <InputField
         name="title"
@@ -51,12 +56,16 @@ export default function TaskForm({
         value={formik.values.desription}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        isValid={formik.touched.desription ? !formik.errors.desription : undefined}
+        isValid={
+          formik.touched.desription ? !formik.errors.desription : undefined
+        }
         error={formik.touched.desription ? formik.errors.desription : ''}
       />
 
       <div>
-        <label htmlFor="priority" className="mb-1 block font-medium">Priority</label>
+        <label htmlFor="priority" className="mb-1 block font-medium">
+          Priority
+        </label>
         <select
           id="priority"
           name="priority"
@@ -71,7 +80,9 @@ export default function TaskForm({
           <option value="HIGH">HIGH</option>
         </select>
         {formik.touched.priority && formik.errors.priority && (
-          <div className="mt-1 text-sm text-red-500">{formik.errors.priority}</div>
+          <div className="mt-1 text-sm text-red-500">
+            {formik.errors.priority}
+          </div>
         )}
       </div>
 

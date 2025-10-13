@@ -47,8 +47,7 @@ export const urls: URLs = {
     getStatistics: `${TamURL}/task/statistics`,
     getAllMembers: `${TamURL}/auth/members`,
     getTasksByUserId: (user_id: string) => `${TamURL}/task/${user_id}/tasks`,
-    langChain:  `${TamURL}/task/langchain-query`,
-
+    langChain: `${TamURL}/task/langchain-query`,
   },
   announcement: {
     createAnnouncement: `${TamURL}/announcement`,
@@ -61,8 +60,6 @@ export const urls: URLs = {
     getAllRooms: `${TamURL}/room/me`,
     getRoomMembers: (room_id: string) => `${TamURL}/room/members/${room_id}`,
     getRoomTasks: (room_id: string) => `${TamURL}/room/tasks/${room_id}`,
-    getChatTasks: (room_id: string) => `${TamURL}/chat/${room_id}`
-  }
+    getChatTasks: (room_id: string) => `${TamURL}/chat/${room_id}`,
+  },
 };
-
-

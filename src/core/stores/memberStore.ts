@@ -2,7 +2,10 @@
 import { create } from 'zustand';
 import { toast } from 'react-toastify';
 import { UserRegiterType } from 'src/core/types/user.type';
-import { getAllMembersService, getTasksByUserIdService } from 'src/services/https-service';
+import {
+  getAllMembersService,
+  getTasksByUserIdService,
+} from 'src/services/https-service';
 
 type TaskType = {
   id: string;

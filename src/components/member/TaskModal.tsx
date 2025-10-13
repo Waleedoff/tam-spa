@@ -42,7 +42,9 @@ export default function TasksModal({ tasks, onClose }: TasksModalProps) {
                   {task.title}
                 </h4>
                 {task.desription && (
-                  <p className="mb-2 text-sm text-gray-600">{task.desription}</p>
+                  <p className="mb-2 text-sm text-gray-600">
+                    {task.desription}
+                  </p>
                 )}
                 <div className="mt-3 flex flex-wrap justify-between gap-2 text-xs text-gray-500">
                   {/* Status */}
@@ -55,8 +57,8 @@ export default function TasksModal({ tasks, onClose }: TasksModalProps) {
                       task.priority === 'HIGH'
                         ? 'bg-red-100 text-red-600'
                         : task.priority === 'MEDIUM'
-                        ? 'bg-yellow-100 text-yellow-700'
-                        : 'bg-teal-100 text-teal-600'
+                          ? 'bg-yellow-100 text-yellow-700'
+                          : 'bg-teal-100 text-teal-600'
                     }`}
                   >
                     <span className="h-2 w-2 rounded-full bg-current" />

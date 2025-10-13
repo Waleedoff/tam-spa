@@ -49,36 +49,37 @@ export default function ChatTab({ roomId, username }: ChatTabProps) {
   };
 
   return (
-    <div className="flex h-[75vh] rounded-xl border bg-white shadow-sm overflow-hidden">
+    <div className="flex h-[75vh] overflow-hidden rounded-xl border bg-white shadow-sm">
       {/* قائمة الأعضاء على اليسار */}
-      <div className="w-64 border-r p-4 bg-gray-50">
-        <h2 className="text-lg font-semibold mb-4">Members</h2>
+      <div className="w-64 border-r bg-gray-50 p-4">
+        <h2 className="mb-4 text-lg font-semibold">Members</h2>
         <div className="h-[calc(100%-2rem)] pr-2">
-        {members.map((member) => (
-  <div key={member.id} className="flex items-center gap-3 mb-3">
-    <div className="relative h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-800">
-      {member.full_name[0]?.toUpperCase()}
-      <span
-        className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white ${
-          member.is_online ? 'bg-green-500' : 'bg-gray-400'
-        }`}
-        title={member.is_online ? 'Online' : 'Offline'}
-      />
-    </div>
-    <div>
-      <div className="text-sm font-medium text-gray-800">{member.full_name}</div>
-      <div className="text-xs text-gray-500">{member.department}</div>
-    </div>
-  </div>
-))}
-
+          {members.map((member) => (
+            <div key={member.id} className="mb-3 flex items-center gap-3">
+              <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-800">
+                {member.full_name[0]?.toUpperCase()}
+                <span
+                  className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white ${
+                    member.is_online ? 'bg-green-500' : 'bg-gray-400'
+                  }`}
+                  title={member.is_online ? 'Online' : 'Offline'}
+                />
+              </div>
+              <div>
+                <div className="text-sm font-medium text-gray-800">
+                  {member.full_name}
+                </div>
+                <div className="text-xs text-gray-500">{member.department}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* المحادثة على اليمين */}
-      <div className="flex flex-col flex-1 justify-between p-4">
+      <div className="flex flex-1 flex-col justify-between p-4">
         {/* الرسائل */}
-        <div className="flex flex-col gap-3 overflow-y-auto pr-2 h-full">
+        <div className="flex h-full flex-col gap-3 overflow-y-auto pr-2">
           {messages?.map((msg) => (
             <div
               key={msg.id}

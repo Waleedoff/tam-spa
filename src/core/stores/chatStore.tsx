@@ -29,17 +29,16 @@ export const useChatStore = create<ChatStore>((set) => ({
     })),
   setMessages: (msgs) => set({ messages: msgs }),
   clearMessages: () => set({ messages: [] }),
-  
-  
+
   fetchMessages: async (roomId) => {
     const response = await getRoomChatsService(roomId);
-    console.log(response)
+    console.log(response);
     const transformed = response.data.map((msg: any) => ({
       id: msg.id,
       sender: msg.user_id,
       text: msg.content,
       me: msg.user_id,
-      gender: msg.gender
+      gender: msg.gender,
     }));
 
     set({ messages: transformed });

@@ -2,19 +2,18 @@ import { getRoomTaskssService } from 'src/services/https-service';
 import { create } from 'zustand';
 
 type UserType = {
-    id: string;
-    full_name: string;
-    department: string;
-    role: string;
-  };
+  id: string;
+  full_name: string;
+  department: string;
+  role: string;
+};
 
-  
 type TaskType = {
   id: string;
   title: string;
   desription: string;
   status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED';
-  user_info: UserType
+  user_info: UserType;
 };
 
 type RoomTasksStore = {
@@ -24,9 +23,7 @@ type RoomTasksStore = {
   setTasks: (tasks: TaskType[]) => void;
 };
 
-
 export const useRoomTasksStore = create<RoomTasksStore>((set) => ({
-
   tasks: [],
   loading: false,
   setTasks: (tasks) => set({ tasks }),
@@ -39,7 +36,6 @@ export const useRoomTasksStore = create<RoomTasksStore>((set) => ({
       set({ loading: false });
     }
   },
-
 
   // tasks: [],
   // loading: false,

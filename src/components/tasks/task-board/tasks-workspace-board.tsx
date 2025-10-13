@@ -56,11 +56,9 @@ export default function TaskWorkspaceBoard() {
             </button>
           )}
         </h2>
-
       </div>
 
       {/* Modal */}
-      
 
       {/* Task Columns */}
       <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto md:grid md:grid-cols-3 md:overflow-visible">
@@ -68,7 +66,7 @@ export default function TaskWorkspaceBoard() {
           const filteredTasks = tasks.filter(
             (t) =>
               t.status === col.status &&
-              t.title.toLowerCase().includes(searchQuery.toLowerCase())
+              t.title.toLowerCase().includes(searchQuery.toLowerCase()),
           );
 
           return (
@@ -101,7 +99,7 @@ export default function TaskWorkspaceBoard() {
                       <h4 className="text-base font-semibold text-gray-800">
                         {task.title}
                       </h4>
-                      <p className="mt-1 text-sm text-gray-500 line-clamp-2">
+                      <p className="mt-1 line-clamp-2 text-sm text-gray-500">
                         {task.description || 'No description'}
                       </p>
                       <div className="mt-2 flex items-center justify-between text-xs text-gray-400">

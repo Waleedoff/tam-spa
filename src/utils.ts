@@ -1,6 +1,6 @@
 // src/utils/jwt.ts
 
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 
 export type ParsedTokenType = {
   id: string;

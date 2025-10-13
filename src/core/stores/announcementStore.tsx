@@ -1,7 +1,5 @@
 import { create } from 'zustand';
-import {
-  GetAllAnnouncementService,
-} from 'src/services/https-service';
+import { GetAllAnnouncementService } from 'src/services/https-service';
 
 interface Announcement {
   id: string;

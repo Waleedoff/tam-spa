@@ -160,16 +160,13 @@ export const getCommentsForAnnouncementService = async (id: string) => {
   });
 };
 
-
 export const queryLangchain = async (query: string) => {
   return makeRequest({
     url: `${urls.task.langChain}`,
     method: HttpMethods.GET,
     params: { q: query },
   });
-}
-
-
+};
 
 export const getAllRoomsService = async (): Promise<RoomType[]> => {
   return makeRequest({
@@ -185,16 +182,12 @@ export const getRoomMembersService = async (roomId: string) => {
   });
 };
 
-
 export const getRoomTaskssService = async (roomId: string) => {
   return makeRequest({
     url: urls.room.getRoomTasks(roomId),
     method: HttpMethods.GET,
   });
 };
-
-
-
 
 export const getRoomChatsService = async (roomId: string) => {
   return makeRequest({

@@ -16,23 +16,26 @@ export function LangchainQuery() {
   };
 
   return (
-    <div className="fixed bottom-4 left-[272px] w-[350px] bg-white rounded-2xl shadow-2xl border border-gray-200 z-50">
-      <div className="flex items-center gap-2 p-4 border-b border-gray-100">
+    <div className="fixed bottom-4 left-[272px] z-50 w-[350px] rounded-2xl border border-gray-200 bg-white shadow-2xl">
+      <div className="flex items-center gap-2 border-b border-gray-100 p-4">
         <Bot className="text-purple-600" />
         <h2 className="text-lg font-semibold">AI answered </h2>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-4 border-b border-gray-100 flex gap-2">
+      <form
+        onSubmit={handleSubmit}
+        className="flex gap-2 border-b border-gray-100 p-4"
+      >
         <input
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="اكتب سؤالك..."
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         <button
           type="submit"
-          className="px-3 py-2 bg-purple-600 text-white text-sm rounded-lg hover:bg-purple-700 transition"
+          className="rounded-lg bg-purple-600 px-3 py-2 text-sm text-white transition hover:bg-purple-700"
         >
           إرسال
         </button>
@@ -40,16 +43,18 @@ export function LangchainQuery() {
 
       <div className="p-4">
         {loading ? (
-          <div className="flex items-center text-gray-600 gap-2 text-sm">
-            <LoaderCircle className="animate-spin w-4 h-4" />
+          <div className="flex items-center gap-2 text-sm text-gray-600">
+            <LoaderCircle className="h-4 w-4 animate-spin" />
             جاري المعالجة...
           </div>
         ) : response ? (
-          <div className="text-gray-800 text-sm whitespace-pre-wrap">
+          <div className="whitespace-pre-wrap text-sm text-gray-800">
             {typeof response === 'string' ? response : JSON.stringify(response)}
           </div>
         ) : (
-          <div className="text-gray-400 text-sm italic">أدخل سؤالًا لتحصل على إجابة</div>
+          <div className="text-sm italic text-gray-400">
+            أدخل سؤالًا لتحصل على إجابة
+          </div>
         )}
       </div>
     </div>

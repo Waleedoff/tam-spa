@@ -36,17 +36,17 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
     }
   },
 
-//   fetchWorkspaceTasks: async (query = ' ') => {
-//     set({loading: true, error:  null});
-//     try {
-//         const data = await getWorkspaceTasksService(query);
-//         set({tasks: data ||  [], loading: false});
+  //   fetchWorkspaceTasks: async (query = ' ') => {
+  //     set({loading: true, error:  null});
+  //     try {
+  //         const data = await getWorkspaceTasksService(query);
+  //         set({tasks: data ||  [], loading: false});
 
-//     } catch (error) {
-//         set({error: "Failed to fetch workspace tasks", loading: false})
-        
-//     }
-//   },
+  //     } catch (error) {
+  //         set({error: "Failed to fetch workspace tasks", loading: false})
+
+  //     }
+  //   },
 
   createTask: async (data) => {
     set({ loading: true, error: null });

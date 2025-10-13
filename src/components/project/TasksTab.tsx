@@ -36,7 +36,7 @@ export default function TasksTab({ roomId }: Props) {
     if (!task || task.user_info.id !== user?.id) return;
 
     const updatedTasks = tasks.map((t) =>
-      t.id === task.id ? { ...t, status: destination.droppableId } : t
+      t.id === task.id ? { ...t, status: destination.droppableId } : t,
     );
     setTasks(updatedTasks);
     await putUpdateTaskService(task.id, destination.droppableId);
@@ -59,7 +59,7 @@ export default function TasksTab({ roomId }: Props) {
               <Droppable droppableId={col.status}>
                 {(provided) => (
                   <div
-                    className="space-y-4 min-h-[200px]"
+                    className="min-h-[200px] space-y-4"
                     ref={provided.innerRef}
                     {...provided.droppableProps}
                   >
@@ -75,18 +75,18 @@ export default function TasksTab({ roomId }: Props) {
                         >
                           {(provided) => (
                             <div
-                              className={`relative w-full rounded-xl border p-4 shadow transition-all duration-300 ease-in-out
-                                ${isMine
-                                  ? 'bg-blue-50 border-blue-400 hover:scale-[1.01] hover:shadow-xl'
+                              className={`relative w-full rounded-xl border p-4 shadow transition-all duration-300 ease-in-out ${
+                                isMine
+                                  ? 'border-blue-400 bg-blue-50 hover:scale-[1.01] hover:shadow-xl'
                                   : 'bg-white'
-                                }`}
+                              }`}
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
                               {/* My Task badge */}
                               {isMine && (
-                                <span className="absolute top-1/1 -translate-y-1/2 left-1/2  flex items-center justify-center  rounded-full bg-blue-600 px-2 py-0.5 text-xs text-white">
+                                <span className="top-1/1 absolute left-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-blue-600 px-2 py-0.5 text-xs text-white">
                                   My Task
                                 </span>
                               )}
@@ -104,7 +104,9 @@ export default function TasksTab({ roomId }: Props) {
                                   {isMine ? '🧍 ' : ''}
                                   {task.user_info.full_name}
                                 </span>
-                                <span>{task.user_info.department.toLowerCase()}</span>
+                                <span>
+                                  {task.user_info.department.toLowerCase()}
+                                </span>
                               </div>
                             </div>
                           )}

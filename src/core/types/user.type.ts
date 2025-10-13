@@ -67,14 +67,13 @@ export type CreateAnnouncemnt = {
   publishing_status: string;
 };
 
-
 // src/core/types/room.type.ts
 export type RoomType = {
   id: string;
   name: string;
   priority: string;
   status: string;
-  created: Date
+  created: Date;
 };
 
 export type ChatType = {
@@ -82,5 +81,4 @@ export type ChatType = {
   content: string;
   username: string;
   created: Date;
-
 };

@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { useChatStore } from "src/core/stores/chatStore";
+import { useEffect, useRef } from 'react';
+import { useChatStore } from 'src/core/stores/chatStore';
 
 // src/hooks/useChatSocket.ts
 export function useChatSocket(roomId: string, username: string) {
@@ -10,8 +10,10 @@ export function useChatSocket(roomId: string, username: string) {
     setRoomId(roomId);
     clearMessages();
     const token = localStorage.getItem('token');
-    const socket = new WebSocket(`ws://localhost:3002/chat/ws/rooms/${roomId}?token=${token}`);
-    
+    const socket = new WebSocket(
+      `ws://localhost:3002/chat/ws/rooms/${roomId}?token=${token}`,
+    );
+
     socketRef.current = socket;
 
     socket.onopen = () => console.log('✅ WebSocket connected');
@@ -22,7 +24,6 @@ export function useChatSocket(roomId: string, username: string) {
         sender: data.username,
         text: data.message,
         me: data.username === username,
-
       });
     };
 
@@ -35,9 +36,10 @@ export function useChatSocket(roomId: string, username: string) {
   }, [roomId]);
 
   const sendMessage = (text: string) => {
-    if (!socketRef.current || socketRef.current.readyState !== WebSocket.OPEN) return;
+    if (!socketRef.current || socketRef.current.readyState !== WebSocket.OPEN)
+      return;
     socketRef.current.send(JSON.stringify({ content: text, room_id: roomId }));
-    addMessage({ sender: username,  text, me: true });
+    addMessage({ sender: username, text, me: true });
   };
 
   return { sendMessage };
