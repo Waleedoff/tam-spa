@@ -1,32 +1,11 @@
-import { useEffect, useState } from 'react';
+// src/containers/department/DepartmentMembersContainer.tsx
+import { useEffect } from 'react';
 import DepartmentMembersList from 'src/components/department/DepartmentMembersList';
-import { GetDepartmentsService } from 'src/services/https-service';
-
-interface Member {
-  username: string;
-  email: string;
-  role: string;
-}
-
-interface Department {
-  department: string;
-  members: Member[];
-}
+import DepartmentSkeleton from 'src/core/skeleton/DepartmentSkeleton';
+import { useDepartmentStore } from 'src/core/stores/departmentStore';
 
 export default function DepartmentMembersContainer() {
-  const [departments, setDepartments] = useState<Department[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchDepartments = async () => {
-    try {
-      const data = await GetDepartmentsService();
-      setDepartments(data);
-    } catch (err) {
-      console.error('Error fetching departments:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { departments, loading, fetchDepartments } = useDepartmentStore();
 
   useEffect(() => {
     fetchDepartments();
@@ -38,7 +17,7 @@ export default function DepartmentMembersContainer() {
         Departments & Members
       </h1>
       {loading ? (
-        <p className="text-center text-gray-500">Loading...</p>
+        <DepartmentSkeleton />
       ) : (
         <DepartmentMembersList departments={departments} />
       )}

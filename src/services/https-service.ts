@@ -4,6 +4,7 @@ import { urls } from 'src/core/http/urls';
 import {
   CommentCreateType,
   CreateAnnouncemnt,
+  RoomType,
   TaskCreateType,
   UserLoginType,
   UserRegiterType,
@@ -38,6 +39,14 @@ export const postRegisterService = async (data: UserRegiterType) => {
 export const getAllTasksService = async (q: string) => {
   return makeRequest({
     url: urls.task.getAllTasks,
+    method: HttpMethods.GET,
+    params: { q },
+  });
+};
+
+export const getWorkspaceTasksService = async (q: string) => {
+  return makeRequest({
+    url: urls.task.getWorkspaceTasks,
     method: HttpMethods.GET,
     params: { q },
   });
@@ -147,6 +156,49 @@ export const CommentOnAnnouncementService = async (
 export const getCommentsForAnnouncementService = async (id: string) => {
   return makeRequest({
     url: `${urls.announcement.getAllAnnouncement}/${id}/comments`,
+    method: HttpMethods.GET,
+  });
+};
+
+
+export const queryLangchain = async (query: string) => {
+  return makeRequest({
+    url: `${urls.task.langChain}`,
+    method: HttpMethods.GET,
+    params: { q: query },
+  });
+}
+
+
+
+export const getAllRoomsService = async (): Promise<RoomType[]> => {
+  return makeRequest({
+    url: urls.room.getAllRooms,
+    method: HttpMethods.GET,
+  });
+};
+
+export const getRoomMembersService = async (roomId: string) => {
+  return makeRequest({
+    url: urls.room.getRoomMembers(roomId),
+    method: HttpMethods.GET,
+  });
+};
+
+
+export const getRoomTaskssService = async (roomId: string) => {
+  return makeRequest({
+    url: urls.room.getRoomTasks(roomId),
+    method: HttpMethods.GET,
+  });
+};
+
+
+
+
+export const getRoomChatsService = async (roomId: string) => {
+  return makeRequest({
+    url: urls.room.getChatTasks(roomId),
     method: HttpMethods.GET,
   });
 };

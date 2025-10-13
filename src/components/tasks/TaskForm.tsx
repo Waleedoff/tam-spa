@@ -1,24 +1,25 @@
-// src/components/tasks/task-create-form/task-create-form.tsx
+// src/components/tasks/TaskForm.tsx
 import { useFormik } from 'formik';
-
 import { InputField } from 'src/components/common/ui/Input';
 import { Button } from 'src/components/common/ui/Button';
 import { TaskCreateType } from 'src/core/types/user.type';
 import { taskCreateValidationSchema } from './task-form.validation';
 
-interface TaskCreateFormProps {
+interface TaskFormProps {
   onSubmit: (values: TaskCreateType) => void;
   onClose: () => void;
   data: TaskCreateType;
   title: string;
+  submitButtonLabel?: string;
 }
 
-export default function TaskCreateForm({
+export default function TaskForm({
   onSubmit,
   onClose,
   data,
   title,
-}: TaskCreateFormProps) {
+  submitButtonLabel = 'Submit',
+}: TaskFormProps) {
   const formik = useFormik<TaskCreateType>({
     initialValues: data,
     validationSchema: taskCreateValidationSchema,
@@ -29,13 +30,8 @@ export default function TaskCreateForm({
   });
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className="w-full space-y-4 p-4 sm:p-6"
-    >
-      <h2 className="text-lg font-semibold text-tamPurple-tam sm:text-xl">
-        {title}
-      </h2>
+    <form onSubmit={formik.handleSubmit} className="w-full space-y-4 p-4 sm:p-6">
+      <h2 className="text-lg font-semibold text-tamPurple-tam sm:text-xl">{title}</h2>
 
       <InputField
         name="title"
@@ -55,16 +51,12 @@ export default function TaskCreateForm({
         value={formik.values.desription}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        isValid={
-          formik.touched.desription ? !formik.errors.desription : undefined
-        }
+        isValid={formik.touched.desription ? !formik.errors.desription : undefined}
         error={formik.touched.desription ? formik.errors.desription : ''}
       />
 
       <div>
-        <label htmlFor="priority" className="mb-1 block font-medium">
-          Priority
-        </label>
+        <label htmlFor="priority" className="mb-1 block font-medium">Priority</label>
         <select
           id="priority"
           name="priority"
@@ -79,9 +71,7 @@ export default function TaskCreateForm({
           <option value="HIGH">HIGH</option>
         </select>
         {formik.touched.priority && formik.errors.priority && (
-          <div className="mt-1 text-sm text-red-500">
-            {formik.errors.priority}
-          </div>
+          <div className="mt-1 text-sm text-red-500">{formik.errors.priority}</div>
         )}
       </div>
 
@@ -97,7 +87,7 @@ export default function TaskCreateForm({
           type="submit"
           className="w-full bg-tamPurple-tam text-white sm:w-auto"
         >
-          Create
+          {submitButtonLabel}
         </Button>
       </div>
     </form>

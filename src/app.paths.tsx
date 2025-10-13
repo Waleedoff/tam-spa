@@ -41,11 +41,19 @@ class AppRoutes {
   getMyTasksPath(): string {
     return '/tasks';
   }
+
+  getAllTasksWorkspacePath(): string {
+    return '/tasks/workspace';
+  }
+
   getMembersPath(): string {
     return '/members';
   }
   getAnnouncementPath(): string {
     return '/announcement';
+  }
+  getChatBotPath(): string {
+    return '/chatbot';
   }
   getDepartmentPath(): string {
     return '/department';
@@ -61,6 +69,10 @@ class AppRoutes {
   // Example on a path with dynamic variables
   getExampleByIdPagePath(): string {
     return `/example/:id`;
+  }
+
+  getProjectDetailPath(id: string): string {
+    return `/projects/${id}`;
   }
 
   getExampleByIdPageUrl(id: string): string {

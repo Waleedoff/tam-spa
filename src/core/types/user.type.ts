@@ -43,6 +43,7 @@ export type UserRegiterType = {
 
 export type ParsedTokenType = {
   sub: string;
+  id: string;
 };
 
 export type RecentTask = {
@@ -64,4 +65,22 @@ export type CreateAnnouncemnt = {
   target_roles: string[];
   target_departments: string[];
   publishing_status: string;
+};
+
+
+// src/core/types/room.type.ts
+export type RoomType = {
+  id: string;
+  name: string;
+  priority: string;
+  status: string;
+  created: Date
+};
+
+export type ChatType = {
+  id: string;
+  content: string;
+  username: string;
+  created: Date;
+
 };

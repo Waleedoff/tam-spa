@@ -4,14 +4,14 @@ import { MdOutlineChecklist } from 'react-icons/md';
 
 interface UserCardProps {
   username: string;
-  specialization: string;
+  department: string;
   gender: string;
   onClick?: () => void;
 }
 
 export function UserCard({
   username,
-  specialization,
+  department,
   gender,
   onClick,
 }: UserCardProps): JSX.Element {
@@ -31,7 +31,7 @@ export function UserCard({
   };
 
   const specializationStyle =
-    specializationColors[specialization.toUpperCase()] ||
+    specializationColors[department.toUpperCase()] ||
     'bg-gray-100 text-gray-800';
 
   return (
@@ -56,7 +56,7 @@ export function UserCard({
           <span
             className={`mt-1 inline-block rounded-full px-3 py-1 text-xs font-medium ${specializationStyle}`}
           >
-            {specialization.toLowerCase()}
+            {department.toLowerCase()}
           </span>
         </div>
         <MdOutlineChecklist

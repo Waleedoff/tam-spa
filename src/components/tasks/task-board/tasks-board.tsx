@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { TaskCard } from '../tasks-card';
+import { TaskCard } from '../../common/ui/tasks-card';
 import { Search } from 'lucide-react';
 import {
   deleteTaskService,

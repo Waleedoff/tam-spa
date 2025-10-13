@@ -1,19 +1,26 @@
+import { useTaskStore } from 'src/core/stores/taskStore';
+import TaskForm from 'src/components/tasks/TaskForm';
 import { TaskCreateType } from 'src/core/types/user.type';
-import TaskForm from 'src/components/tasks/TaskForm'; // أو أي form مشابه
 
 interface TaskEditProps {
-  task: TaskCreateType;
-  onSuccess: (data: TaskCreateType) => void;
+  task: TaskCreateType & { id: string };
   onClose: () => void;
 }
 
-export default function TaskEdit({ task, onSuccess, onClose }: TaskEditProps) {
+export default function TaskEdit({ task, onClose }: TaskEditProps) {
+  const updateTask = useTaskStore((state) => state.updateTask);
+
+  const handleSubmit = async (data: TaskCreateType) => {
+    await updateTask(task.id, data);
+    onClose();
+  };
+
   return (
     <TaskForm
+      onSubmit={handleSubmit}
       onClose={onClose}
-      onSubmit={onSuccess}
       data={task}
-      title={'Edit Task'}
+      title="Edit Task"
     />
   );
 }
